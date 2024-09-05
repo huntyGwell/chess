@@ -6,3 +6,5 @@
 
 ## getting started!
 I am working on phase 0 and will see where I get! I think there is some starter code if not Ill have to create the folders, files, and classes my self, no big deal.
+
+there was indeed some stater code! I have downloaded nad am about to unzip the material
