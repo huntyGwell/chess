@@ -10,3 +10,6 @@ I am working on phase 0 and will see where I get! I think there is some starter 
 there was indeed some stater code! I have downloaded nad am about to unzip the material
 
 I was reading the provided documentation when I had to tend to some other pressing issues but I am back at it and have gotten the starter code up and runnign!
+
+## Phase 0:
+I have gotten it working so far in intellij!
