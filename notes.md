@@ -13,3 +13,10 @@ I was reading the provided documentation when I had to tend to some other pressi
 
 ## Phase 0:
 I have gotten it working so far in intellij!
+
+
+I have gotten going and writtent some code to pass tests! here we go!!!
+
+# TO DO:
+- implament the toString method chess moves class
+- write movePices()
