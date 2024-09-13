@@ -7,7 +7,7 @@ package chess;
  * signature of the existing methods.
  */
 public class ChessMove {
-
+    // I'm pretty sure these should not be mutable.
     private final ChessPosition startPosition;
     private final ChessPosition endPosition;
     private final ChessPiece.PieceType promotionPiece;
@@ -49,5 +49,7 @@ public class ChessMove {
         return "ChessMove{" + "startPosition=" + startPosition + ", endPosition=" + endPosition +
                 ", promotionPiece=" + promotionPiece + '}';
     }
+    //professor jensen said we would probably need to write overrides for a couple other function like equals
+    // and maybe one other???
 }
 
