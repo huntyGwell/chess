@@ -20,3 +20,4 @@ I have gotten going and writtent some code to pass tests! here we go!!!
 # TO DO:
 - implament the toString method chess moves class
 - write movePices()
+- kay I have gotten the first chunk of tests working I need to figure out how to write the above function and move on
