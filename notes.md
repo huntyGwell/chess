@@ -21,5 +21,7 @@ I have gotten going and writtent some code to pass tests! here we go!!!
 - implament the toString method chess moves class
     - done
 - write movePices()
+	- I have gotten all the test to fail right now BUT not "not implamented yet" so I really need to figure out how to do this function.
+	- I am sure I will fail more tests after I write this code. this is just another step toward where I am trying to go.
 - kay I have gotten the first chunk of tests working I need to figure out how to write the above function and move on
 - run more test and keep chugging along!!

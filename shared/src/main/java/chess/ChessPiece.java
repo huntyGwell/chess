@@ -51,6 +51,9 @@ public class ChessPiece {
         /* for now, I am going to pass an empty array
         * fix this later
          */
-         return new ArrayList<>(); // this is just a step need to actually right this later.
+         return new ArrayList<>(); // this is just a step need to actually write this later.
+        //I'm going to have to figure out a way to track piece moves. I am not sure how to do this
+        //maybe not track as much as predict/calculate...
+        //will try again in the morning.
     }
 }
