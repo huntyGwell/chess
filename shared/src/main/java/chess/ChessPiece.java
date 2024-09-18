@@ -1,7 +1,10 @@
 package chess;
 
+import chess.PieceOptionsCalc.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * Represents a single chess piece
@@ -10,8 +13,10 @@ import java.util.Collection;
  * signature of the existing methods.
  */
 public class ChessPiece {
-
+    //make private color and type
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
+        //this.color
+        //this.type
     }
 
     /**
@@ -30,7 +35,7 @@ public class ChessPiece {
      * @return Which team this chess piece belongs to
      */
     public ChessGame.TeamColor getTeamColor() {
-        throw new RuntimeException("Not implemented");
+        //return pieceColor;
     }
 
     /**
