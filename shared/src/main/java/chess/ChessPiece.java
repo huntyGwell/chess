@@ -34,9 +34,8 @@ public class ChessPiece {
     /**
      * @return Which team this chess piece belongs to
      */
-    public ChessGame.TeamColor getTeamColor() {
-        //return pieceColor;
-    }
+    public ChessGame.TeamColor getTeamColor() {throw new RuntimeException("Not implemented yet");}
+        //return pieceColor;}
 
     /**
      * @return which type of chess piece this piece is
