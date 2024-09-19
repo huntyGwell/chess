@@ -24,11 +24,15 @@ public interface PieceOptionsCalc {
     }
 
     //static option
-    static HashSet<ChessMove> StateMoves(ChessBoard board, ChessPosition position) {
-        return null; //this is all wrong
+    static HashSet<ChessMove> CreateStateMoves(ChessBoard board, ChessPosition position) {
+        HashSet<ChessMove> moves = HashSet.newHashSet(8);
+        int row = position.getRow();
+        int column = position.getColumn();
+
+        ChessGame.
     }
     //direction option
-    static HashSet<ChessMove> DirectionMoves(ChessBoard board, ChessPosition position) {
+    static HashSet<ChessMove> CreateDirectionMoves(ChessBoard board, ChessPosition position) {
         return null; //this is all wrong
     }
 
