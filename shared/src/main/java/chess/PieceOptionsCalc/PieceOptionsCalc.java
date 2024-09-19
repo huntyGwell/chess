@@ -13,7 +13,7 @@ import java.util.HashSet;
 public interface PieceOptionsCalc {
     //get Options
         //return null (implement in the Options * classes)
-    static HashSet<ChessMove> GetOptions(ChessBoard board, ChessPosition currPosition) {
+    static HashSet<ChessMove> GetOptions(ChessBoard board, ChessPosition Position) {
         return null;
     }
 
@@ -24,6 +24,12 @@ public interface PieceOptionsCalc {
     }
 
     //static option
+    static HashSet<ChessMove> StateMoves(ChessBoard board, ChessPosition position) {
+        return null; //this is all wrong
+    }
     //direction option
+    static HashSet<ChessMove> DirectionMoves(ChessBoard board, ChessPosition position) {
+        return null; //this is all wrong
+    }
 
 }
