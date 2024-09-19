@@ -30,4 +30,23 @@ public class ChessPosition {
     public int getColumn() {
         return column;
     }
+    //Override equals and toString
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChessPosition that = (ChessPosition) o;
+        return row == that.row && column == that.column;
+    }
+    //my hash
+    @Override
+    public int hashCode() {
+        int result = row;
+        result = 31 * result + column;
+        return result;
+    }
+    @Override
+    public String toString() {
+        return "Current Place: row = " + row + ", column = " + column;
+    }
 }
