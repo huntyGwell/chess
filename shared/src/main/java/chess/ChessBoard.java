@@ -42,4 +42,5 @@ public class ChessBoard {
         //add all black
         //return?
     }
+    // show (get) which colors turn it is??
 }

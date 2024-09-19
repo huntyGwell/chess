@@ -64,15 +64,14 @@ public class ChessGame {
         for (ChessMove move : moves) {
             ChessPiece temporary = board.getPiece(move.getEndPosition());
             board.addPiece(startPosition, null);
-            board.addPiece(move.getEndPosition(), temporary); //jinkies i am not sure here (temp)
+            board.addPiece(move.getEndPosition(), piece); //jinkies i am not sure here (temp)-----fixed!
             if (!isInCheck(piece.getTeamColor())) {
                 validMoves.add(move);
             }//otherwise revert
             board.addPiece(move.getEndPosition(), temporary);
-            board.addPiece(move.getEndPosition(), temporary); //this throws an error too
+            board.addPiece(move.getStartPosition(), piece); //this throws an error too----fixed ... i think!
         }
         return validMoves;
-
         }
 
     /**
@@ -81,8 +80,8 @@ public class ChessGame {
      * @param move chess move to preform
      * @throws InvalidMoveException if move is invalid
      */
-    public void makeMove(ChessMove move) throws InvalidMoveException {
-        throw new RuntimeException("Not implemented");
+    public void makeMove(ChessMove move)  { //should this throw an exception??
+        boolean isColorsTurn = getTeamTurn() == board.team
     }
 
     /**

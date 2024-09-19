@@ -28,8 +28,7 @@ public interface PieceOptionsCalc {
         HashSet<ChessMove> moves = HashSet.newHashSet(8);
         int row = position.getRow();
         int column = position.getColumn();
-
-        ChessGame.
+        //ChessGame.
     }
     //direction option
     static HashSet<ChessMove> CreateDirectionMoves(ChessBoard board, ChessPosition position) {
