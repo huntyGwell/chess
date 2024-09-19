@@ -51,5 +51,21 @@ public class ChessMove {
     }
     //professor jensen said we would probably need to write overrides for a couple other function like equals
     // and maybe one other???
+    //hash
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChessMove that = (ChessMove) o;
+        return startPosition.equals(that.startPosition) && endPosition.equals(that.endPosition)
+                && promotionPiece == that.promotionPiece;
+    }
+    @Override
+    public int hashCode() {
+        int result = startPosition.hashCode();
+        result = 31 * result + endPosition.hashCode();
+        result = 31 * result + promotionPiece.hashCode();
+        return result;
+    }
 }
 
