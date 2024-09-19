@@ -10,8 +10,13 @@ import java.util.Collection;
  */
 public class ChessGame {
 
-    public ChessGame() {
+    private TeamColor colorsMove;
+    private ChessBoard board;
+    private boolean gameOver;
 
+    public ChessGame() {
+        board = new ChessBoard();
+        setTeamTurn(TeamColor.WHITE); //white moves first
     }
     //holy mother this is a big one!
     //I should probably do this sooner rather then later to get it done and debugged
@@ -20,7 +25,7 @@ public class ChessGame {
      * @return Which team's turn it is
      */
     public TeamColor getTeamTurn() {
-        throw new RuntimeException("Not implemented");
+        return colorsMove;
     }
 
     /**
@@ -29,7 +34,7 @@ public class ChessGame {
      * @param team the team whose turn it is
      */
     public void setTeamTurn(TeamColor team) {
-        throw new RuntimeException("Not implemented");
+        colorsMove = team;
     }
 
     /**
@@ -38,6 +43,7 @@ public class ChessGame {
     public enum TeamColor {
         WHITE,
         BLACK
+        //anything else needed to enum??
     }
 
     /**
@@ -79,6 +85,8 @@ public class ChessGame {
      */
     public boolean isInCheckmate(TeamColor teamColor) {
         throw new RuntimeException("Not implemented");
+        //needs to be in check and stalemate
+        //set gameOver to true
     }
 
     /**
@@ -90,6 +98,7 @@ public class ChessGame {
      */
     public boolean isInStalemate(TeamColor teamColor) {
         throw new RuntimeException("Not implemented");
+        //set gameOver to true??
     }
 
     /**
@@ -98,7 +107,7 @@ public class ChessGame {
      * @param board the new board to use
      */
     public void setBoard(ChessBoard board) {
-        throw new RuntimeException("Not implemented");
+        this.board = board;
     }
 
     /**
@@ -107,6 +116,8 @@ public class ChessGame {
      * @return the chessboard
      */
     public ChessBoard getBoard() {
-        throw new RuntimeException("Not implemented");
+        return board;
     }
+    //game over flag??
+    //Overrides
 }
