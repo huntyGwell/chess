@@ -13,6 +13,8 @@ public class ChessGame {
     public ChessGame() {
 
     }
+    //holy mother this is a big one!
+    //I should probably do this sooner rather then later to get it done and debugged
 
     /**
      * @return Which team's turn it is

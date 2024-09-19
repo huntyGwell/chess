@@ -9,7 +9,7 @@ package chess;
 public class ChessBoard {
     private ChessPiece[][] squares = new ChessPiece[8][8];
     public ChessBoard() {
-        
+        //I think I need some implementation here??
     }
 
     /**
@@ -38,5 +38,8 @@ public class ChessBoard {
      */
     public void resetBoard() {
         throw new RuntimeException("Not implemented");
+        //add all white
+        //add all black
+        //return?
     }
 }
