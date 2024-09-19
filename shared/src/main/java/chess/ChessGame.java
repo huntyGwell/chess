@@ -59,10 +59,21 @@ public class ChessGame {
         if (piece == null) {
             return null;
         }
-        HashSet<ChessMove> moves = new HashSet<>();
+        HashSet<ChessMove> moves = (HashSet<ChessMove>) board.getPiece(startPosition).pieceMoves(board, startPosition);
+        HashSet<ChessMove> validMoves = HashSet.newHashSet(moves.size());
+        for (ChessMove move : moves) {
+            ChessPiece temporary = board.getPiece(move.getEndPosition());
+            board.addPiece(startPosition, null);
+            board.addPiece(move.getEndPosition(), temporary); //jinkies i am not sure here (temp)
+            if (!isInCheck(piece.getTeamColor())) {
+                validMoves.add(move);
+            }//otherwise revert
+            board.addPiece(move.getEndPosition(), temporary);
+            board.addPiece(move.getEndPosition(), temporary); //this throws an error too
+        }
+        return validMoves;
 
         }
-    }
 
     /**
      * Makes a move in a chess game
