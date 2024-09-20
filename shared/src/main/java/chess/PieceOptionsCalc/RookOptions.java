@@ -8,4 +8,11 @@ import chess.ChessBoard;
 import java.util.HashSet;
 
 public class RookOptions implements PieceOptionsCalc{
+    public static HashSet<ChessMove> calculateOptions(ChessBoard board, ChessPosition position) {
+        int y = position.getRow();
+        int x = position.getColumn();
+        int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        ChessGame.TeamColor teamColor = board.getTeamColor(position);
+        return PieceOptionsCalc.CreateDirectionMoves(board, position, directions, y, x, teamColor);
+    }
 }
