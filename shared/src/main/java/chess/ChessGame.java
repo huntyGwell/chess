@@ -2,6 +2,7 @@ package chess;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 
 /**
  * For a class that can manage a chess game, making moves on a board
@@ -81,9 +82,7 @@ public class ChessGame {
      * @param move chess move to preform
      * @throws InvalidMoveException if move is invalid
      */
-    public void makeMove(ChessMove move) throws InvalidMoveException { //should this throw an exception??---
-                                                    // ---yes it should!! lol
-                                                    //lol need to read better!
+    public void makeMove(ChessMove move) throws InvalidMoveException {
         boolean isColorsTurn = getTeamTurn() == board.getTeamColor(move.getStartPosition());
         Collection<ChessMove> availableMoves = validMoves(move.getStartPosition());
         if (availableMoves == null) {
@@ -117,7 +116,8 @@ public class ChessGame {
         for (int i = 0; i < 8; i++) {
             for (int ii = 0; ii < 8; ii++) {
                 ChessPiece piece = board.getPiece(new ChessPosition(i, ii));
-                if (piece != null && piece.getTeamColor() == teamColor && piece.getPieceType() == //consider removing hte null check??
+                if (piece != null && piece.getTeamColor() == teamColor && piece.getPieceType() == //consider removing
+                        // the null check??
                         ChessPiece.PieceType.KING) {
                     kingSpot = new ChessPosition(i, ii);
                 }
@@ -195,4 +195,19 @@ public class ChessGame {
     }
     //game over flag??
     //Overrides
+    @Override
+    public String toString() {
+        return "Color" + colorsMove + "\n" + board;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChessGame chessGame = (ChessGame) o;
+        return colorsMove == chessGame.colorsMove && board.equals(chessGame.board);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(colorsMove, board);
+    }
 }

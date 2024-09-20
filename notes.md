@@ -23,7 +23,9 @@ I will have a package to calculate to move options for the pieces.
 - write the make options in the calculator folder
 	-done
 -finish chessGame
+	-done
 -finish chessBoard
+-finish chesspiece
 -finish optionsinterface
 -implememnt pieces options
 
