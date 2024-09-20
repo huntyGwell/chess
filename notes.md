@@ -20,7 +20,8 @@ I have gotten going and writtent some code to pass tests! here we go!!!
 I will have a package to calculate to move options for the pieces.
 
 # TO DO:
-- write the move options in the calculator folder
+- write the make options in the calculator folder
+	-done
 -finish chessGame
 -finish chessBoard
 -finish optionsinterface

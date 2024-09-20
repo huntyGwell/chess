@@ -129,11 +129,14 @@ public class ChessGame {
                 if (piece == null || !piece.getTeamColor().equals(teamColor)) {
                     continue;
                 }
-                for (ChessMove opponentMove : validMoves(kingSpot)) { //look here 
-
+                for (ChessMove opponentMove : validMoves(kingSpot)) { //look here
+                    if (opponentMove.getEndPosition().equals(kingSpot)) {
+                        return true;
+                    }
                 }
             }
         }
+        return false;
     }
 
     /**
