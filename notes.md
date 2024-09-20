@@ -21,4 +21,8 @@ I will have a package to calculate to move options for the pieces.
 
 # TO DO:
 - write the move options in the calculator folder
+-finish chessGame
+-finish chessBoard
+-finish optionsinterface
+-implememnt pieces options
 

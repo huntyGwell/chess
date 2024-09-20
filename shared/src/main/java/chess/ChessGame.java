@@ -13,14 +13,15 @@ public class ChessGame {
 
     private TeamColor colorsMove;
     private ChessBoard board;
-    private boolean gameOver;
+
+    //gameOver Flag bool
 
     public ChessGame() {
         board = new ChessBoard();
         setTeamTurn(TeamColor.WHITE); //white moves first
     }
     //holy mother this is a big one!
-    //I should probably do this sooner rather then later to get it done and debugged
+    //I should probably do this sooner rather than later to get it done and debugged
 
     /**
      * @return Which team's turn it is
@@ -102,9 +103,7 @@ public class ChessGame {
         else {
             throw new InvalidMoveException(String.format("valid move! %b now is %b 's turn",isValidMove,
                     isColorsTurn)); //why does the font on format look like that?
-
         }//nested if and check if the correct team is up
-
     }
 
     /**
@@ -124,9 +123,9 @@ public class ChessGame {
      * @return True if the specified team is in checkmate
      */
     public boolean isInCheckmate(TeamColor teamColor) {
-        throw new RuntimeException("Not implemented");
         //needs to be in check and stalemate
         //set gameOver to true
+        return isInCheck(teamColor) && isInStalemate(teamColor);
     }
 
     /**
@@ -137,8 +136,21 @@ public class ChessGame {
      * @return True if the specified team is in stalemate, otherwise false
      */
     public boolean isInStalemate(TeamColor teamColor) {
-        throw new RuntimeException("Not implemented");
         //set gameOver to true??
+        for (int i = 1; i <= 8; i++) {
+            for (int ii = 1; ii <= 8; ii++) {
+                ChessPosition position = new ChessPosition(i, ii);
+                ChessPiece piece = board.getPiece(position);
+                Collection<ChessMove> moves;// = validMoves(position);
+                if (piece != null && piece.getTeamColor() == teamColor) {
+                    moves = validMoves(position);
+                    if (moves != null && !moves.isEmpty()) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     /**
