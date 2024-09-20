@@ -117,7 +117,21 @@ public class ChessGame {
         for (int i = 0; i < 8; i++) {
             for (int ii = 0; ii < 8; ii++) {
                 ChessPiece piece = board.getPiece(new ChessPosition(i, ii));
-                if (piece != null && piece.getTeamColor() == teamColor) {}
+                if (piece != null && piece.getTeamColor() == teamColor && piece.getPieceType() == //consider removing hte null check??
+                        ChessPiece.PieceType.KING) {
+                    kingSpot = new ChessPosition(i, ii);
+                }
+            }
+        }
+        for (int i = 0; i < 8; i++) { //=================refractor the null check
+            for (int ii = 0; ii < 8; ii++) {
+                ChessPiece piece = board.getPiece(new ChessPosition(i, ii));
+                if (piece == null || !piece.getTeamColor().equals(teamColor)) {
+                    continue;
+                }
+                for (ChessMove opponentMove : validMoves(kingSpot)) { //look here 
+
+                }
             }
         }
     }
