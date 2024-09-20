@@ -31,7 +31,7 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
-        return squares[position.getRow()][position.getColumn()];
+        return squares[position.getRow()][position.getColumn()];//0 index??
     }
 
     /**
@@ -70,6 +70,12 @@ public class ChessBoard {
     // show (get) which colors turn it is??
     public ChessGame.TeamColor getTeamColor(ChessPosition position) {
         return squares[position.getRow()][position.getColumn()].getTeamColor();
+    }
+    public ChessGame.TeamColor getSquaresColor(ChessPosition position) {
+        if(getPiece(position) != null) {
+            return getPiece(position).getTeamColor();
+        }
+        return null;
     }
     @Override
     public String toString() {

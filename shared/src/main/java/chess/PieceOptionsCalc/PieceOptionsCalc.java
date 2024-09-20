@@ -29,13 +29,16 @@ public interface PieceOptionsCalc {
         int row = position.getRow();
         int column = position.getColumn();
         ChessGame.TeamColor teamColor = board.getTeamColor(position);
-        for(int i = 0; i < realizableMoves.length; i++) {
-            ChessPosition newPosition = new ChessPosition(row, column);//modify with realizableMoves
+        for(int[] realizableMove : realizableMoves) {
+            ChessPosition newPosition = new ChessPosition(row + realizableMove[1], column + realizableMove[0]);//modify with realizableMoves
+            if(isValidPosition(newPosition) && board.getSquaresColor(newPosition) != teamColor) {
+                moves.add(new ChessMove(position, newPosition, null));
+            }
         }
+        return moves;
     }
     //direction option
     static HashSet<ChessMove> CreateDirectionMoves(ChessBoard board, ChessPosition position) {
-        return null; //this is all wrong
     }
 
 }
