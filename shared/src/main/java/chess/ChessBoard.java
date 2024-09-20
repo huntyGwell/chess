@@ -43,4 +43,7 @@ public class ChessBoard {
         //return?
     }
     // show (get) which colors turn it is??
+    public ChessGame.TeamColor getTeamColor(ChessPosition position) {
+        return squares[position.getRow()][position.getColumn()].getTeamColor();
+    }
 }
