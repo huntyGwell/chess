@@ -80,10 +80,16 @@ public class ChessGame {
      * @param move chess move to preform
      * @throws InvalidMoveException if move is invalid
      */
-    public void makeMove(ChessMove move)  { //should this throw an exception??------yes it should!! lol
+    public void makeMove(ChessMove move) throws InvalidMoveException { //should this throw an exception??---
+                                                    // ---yes it should!! lol
                                                     //lol need to read better!
         boolean isColorsTurn = getTeamTurn() == board.getTeamColor(move.getStartPosition());
         Collection<ChessMove> availableMoves = validMoves(move.getStartPosition());
+        if (availableMoves == null) {
+            throw new InvalidMoveException("no moves available");
+        }
+        boolean isValidMove = availableMoves.contains(move);
+        if (isValidMove && isColorsTurn) {}//nested if and check if the correct team is up
 
     }
 
