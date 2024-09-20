@@ -25,6 +25,7 @@ I will have a package to calculate to move options for the pieces.
 -finish chessGame
 	-done
 -finish chessBoard
+	-done
 -finish chesspiece
 -finish optionsinterface
 -implememnt pieces options

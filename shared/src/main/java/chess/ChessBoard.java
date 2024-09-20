@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.Arrays;
+
 /**
  * A chessboard that can hold and rearrange chess pieces.
  * <p>
@@ -52,10 +54,45 @@ public class ChessBoard {
             addPiece(new ChessPosition(2, i), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.PAWN));
         }
         //add all black
-        //return? --------- no is void
+        addPiece(new ChessPosition(8, 1), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK));
+        addPiece(new ChessPosition(8, 2), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT));
+        addPiece(new ChessPosition(8, 3), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP));
+        addPiece(new ChessPosition(8, 4), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.QUEEN));
+        addPiece(new ChessPosition(8, 5), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KING));
+        addPiece(new ChessPosition(8, 6), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP));
+        addPiece(new ChessPosition(8, 7), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT));
+        addPiece(new ChessPosition(8, 8), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK));
+        //add pawns
+        for(int i = 1; i < 8; i++) {
+            addPiece(new ChessPosition(7, i), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.PAWN));
+        }
     }
     // show (get) which colors turn it is??
     public ChessGame.TeamColor getTeamColor(ChessPosition position) {
         return squares[position.getRow()][position.getColumn()].getTeamColor();
+    }
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        for (int y = 7; y >= 0; y--) {
+            output.append("|");
+            for (int x = 0; x < 8; x++) {
+                output.append(squares[x][y] != null ? squares[x][y].toString() : " ");
+                output.append("|");
+            }
+            output.append("\n");
+        }
+        return output.toString();
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChessBoard chessBoard = (ChessBoard) o;
+        return Arrays.deepEquals(squares, chessBoard.squares);
+    }
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(squares);
     }
 }
