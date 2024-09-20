@@ -38,7 +38,30 @@ public interface PieceOptionsCalc {
         return moves;
     }
     //direction option
-    static HashSet<ChessMove> CreateDirectionMoves(ChessBoard board, ChessPosition position) {
+    static HashSet<ChessMove> CreateDirectionMoves(ChessBoard board, ChessPosition position, int[][] moveVec,
+                                                   int row, int column, ChessGame.TeamColor teamColor) {
+        HashSet<ChessMove> moves = HashSet.newHashSet(83);
+        for (int[] direction : moveVec) {
+            boolean closed = false;
+            int i = 1;
+            while (!closed) {
+                ChessPosition newPosition = new ChessPosition(row + direction[1] * i, column + direction[0] * i);
+                if (!isValidPosition(newPosition)) {
+                    closed = true;
+                } else if (board.getPiece(newPosition) == null) {
+                    moves.add(new ChessMove(position, newPosition, null));
+                } else if (board.getSquaresColor(newPosition) != teamColor) {
+                    moves.add(new ChessMove(position, newPosition, null));
+                    closed = true;
+                } else if (board.getSquaresColor(newPosition) == teamColor) {
+                    closed = true;
+                }
+                else {
+                    closed= true;
+                }
+                i++;
+            }
+        }
+        return moves;
     }
-
 }
