@@ -28,5 +28,6 @@ I will have a package to calculate to move options for the pieces.
 	-done
 -finish chesspiece
 -finish optionsinterface
+	-done
 -implememnt pieces options
 
