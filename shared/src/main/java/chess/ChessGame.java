@@ -89,7 +89,21 @@ public class ChessGame {
             throw new InvalidMoveException("no moves available");
         }
         boolean isValidMove = availableMoves.contains(move);
-        if (isValidMove && isColorsTurn) {}//nested if and check if the correct team is up
+        if (isValidMove && isColorsTurn) {
+            ChessPiece temporary = board.getPiece(move.getEndPosition());
+            if (move.getPromotionPiece() != null) {
+                temporary = new ChessPiece(temporary.getTeamColor(), move.getPromotionPiece());
+            }
+            board.addPiece(move.getStartPosition(), null);
+            board.addPiece(move.getEndPosition(), temporary);
+            setTeamTurn(getTeamTurn() == TeamColor.BLACK ? TeamColor.WHITE : TeamColor.BLACK); // ternary operator
+            //maybe switch the colors
+        }
+        else {
+            throw new InvalidMoveException(String.format("valid move! %b now is %b 's turn",isValidMove,
+                    isColorsTurn)); //why does the font on format look like that?
+
+        }//nested if and check if the correct team is up
 
     }
 
