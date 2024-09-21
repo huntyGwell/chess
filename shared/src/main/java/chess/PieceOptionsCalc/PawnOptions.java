@@ -28,6 +28,12 @@ public class PawnOptions implements PieceOptionsCalc{
             ChessPosition forwardPosition = new ChessPosition(row + incrementation, column);
             if (PieceOptionsCalc.isValidPosition(forwardPosition) && board.getPiece(forwardPosition) == null) {
                 moves.add(new ChessMove(position, forwardPosition, promotionPiece));
+            }//doubleJump
+            ChessPosition doubleJumpPosition = new ChessPosition(row + incrementation*2, column);
+            if (PieceOptionsCalc.isValidPosition(doubleJumpPosition) && board.getPiece(doubleJumpPosition) == null
+                            && board.getPiece(forwardPosition) == null &&
+                    ((team == ChessGame.TeamColor.BLACK && row == 7) || (team == ChessGame.TeamColor.WHITE && row == 2))) {
+                moves.add(new ChessMove(position, doubleJumpPosition, promotionPiece));
             }// now attack right
             ChessPosition attackRight = new ChessPosition(row + incrementation, column + 1);
             if (PieceOptionsCalc.isValidPosition(attackRight) && board.getPiece(attackRight) != null &&
@@ -35,15 +41,11 @@ public class PawnOptions implements PieceOptionsCalc{
                 moves.add(new ChessMove(position, attackRight, promotionPiece));
             }//now attack left
             ChessPosition attackLeft = new ChessPosition(row + incrementation, column -1);
-            if () {
-
+            if (PieceOptionsCalc.isValidPosition(attackLeft) && board.getPiece(attackLeft) != null &&
+                    board.getSquaresColor(attackLeft) != team) {
+                moves.add(new ChessMove(position, attackLeft, promotionPiece));
             }
-
         }
-        //attack left
-
-        //doublejump first move option
-
         return moves;
     }
 }
