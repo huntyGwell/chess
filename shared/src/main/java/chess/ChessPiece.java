@@ -14,9 +14,12 @@ import java.util.Objects;
  */
 public class ChessPiece {
     //make private color and type
+    private ChessGame.TeamColor color;
+    private PieceType type;
+
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
-        //this.color
-        //this.type
+        this.color = pieceColor;
+        this.type = type;
     }
 
     /**
@@ -34,14 +37,15 @@ public class ChessPiece {
     /**
      * @return Which team this chess piece belongs to
      */
-    public ChessGame.TeamColor getTeamColor() {throw new RuntimeException("Not implemented yet");}
-        //return pieceColor;}
+    public ChessGame.TeamColor getTeamColor() {
+        return color;
+    }
 
     /**
      * @return which type of chess piece this piece is
      */
     public PieceType getPieceType() {
-        throw new RuntimeException("Not implemented");
+        return type;
     }
 
     /**
@@ -52,12 +56,13 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-        /* for now, I am going to pass an empty array
-        * fix this later
-         */
-         return new ArrayList<>(); // this is just a step need to actually write this later.
-        //I'm going to have to figure out a way to track piece moves. I am not sure how to do this
-        //maybe not track as much as predict/calculate...
-        //will try again in the morning.
+        return switch (type) {
+            case KING -> KingOptions.calculateOptions(board, myPosition);
+            case QUEEN -> QueenOptions.calculateOptions(board, myPosition);
+            case BISHOP -> BishopOptions.calculateOptions(board, myPosition);
+            case KNIGHT -> KnightOptions.calculateOptions(board, myPosition);
+            case ROOK -> RookOptions.calculateOptions(board, myPosition);
+            case PAWN -> PawnOptions.calculateOptions(board, myPosition);
+        };
     }
 }
