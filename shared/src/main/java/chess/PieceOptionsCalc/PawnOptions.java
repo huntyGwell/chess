@@ -26,10 +26,15 @@ public class PawnOptions implements PieceOptionsCalc{
         }//now forward move
         for (ChessPiece.PieceType promotionPiece : promotionPieces) {
             ChessPosition forwardPosition = new ChessPosition(row + incrementation, column);
-            if (PieceOptionsCalc.isValidPosition(forwardPosition) && board.getPiece()) {}
+            if (PieceOptionsCalc.isValidPosition(forwardPosition) && board.getPiece(forwardPosition) == null) {
+                moves.add(new ChessMove(position, forwardPosition, promotionPiece));
+            }// now attack right
+            ChessPosition attackRight = new ChessPosition(row + incrementation, column + 1);
+            if (PieceOptionsCalc.isValidPosition(attackRight) && board.getPiece(attackRight) != null &&
+                                board.getSquaresColor(attackRight) != team) {
+                moves.add(new ChessMove(position, attackRight, promotionPiece));
+            }//now attack left
         }
-         //attack right
-
         //attack left
 
         //doublejump first move option
