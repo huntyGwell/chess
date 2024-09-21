@@ -24,6 +24,10 @@ public class PawnOptions implements PieceOptionsCalc{
             promotionPieces = new ChessPiece.PieceType[]{ChessPiece.PieceType.QUEEN, ChessPiece.PieceType.KNIGHT,
             ChessPiece.PieceType.BISHOP, ChessPiece.PieceType.ROOK};
         }//now forward move
+        for (ChessPiece.PieceType promotionPiece : promotionPieces) {
+            ChessPosition forwardPosition = new ChessPosition(row + incrementation, column);
+            if (PieceOptionsCalc.isValidPosition(forwardPosition) && board.getPiece()) {}
+        }
          //attack right
 
         //attack left
