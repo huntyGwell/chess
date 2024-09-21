@@ -13,6 +13,6 @@ public class RookOptions implements PieceOptionsCalc{
         int x = position.getColumn();
         int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
         ChessGame.TeamColor teamColor = board.getTeamColor(position);
-        return PieceOptionsCalc.CreateDirectionMoves(board, position, directions, y, x, teamColor);
+        return PieceOptionsCalc.crossMoves(board, position, directions, y, x, teamColor);
     }
 }

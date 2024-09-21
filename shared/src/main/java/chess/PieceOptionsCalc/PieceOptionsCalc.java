@@ -24,7 +24,7 @@ public interface PieceOptionsCalc {
     }
 
     //static option
-    static HashSet<ChessMove> CreateStateMoves(ChessBoard board, ChessPosition position, int[][] realizableMoves) {
+    static HashSet<ChessMove> straightMoves(ChessBoard board, ChessPosition position, int[][] realizableMoves) {
         HashSet<ChessMove> moves = HashSet.newHashSet(8);
         int row = position.getRow();
         int column = position.getColumn();
@@ -38,8 +38,8 @@ public interface PieceOptionsCalc {
         return moves;
     }
     //direction option
-    static HashSet<ChessMove> CreateDirectionMoves(ChessBoard board, ChessPosition position, int[][] moveVec,
-                                                   int row, int column, ChessGame.TeamColor teamColor) {
+    static HashSet<ChessMove> crossMoves(ChessBoard board, ChessPosition position, int[][] moveVec,
+                                         int row, int column, ChessGame.TeamColor teamColor) {
         HashSet<ChessMove> moves = HashSet.newHashSet(83);
         for (int[] direction : moveVec) {
             boolean closed = false;

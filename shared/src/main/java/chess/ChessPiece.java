@@ -65,4 +65,27 @@ public class ChessPiece {
             case PAWN -> PawnOptions.calculateOptions(board, myPosition);
         };
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChessPiece that = (ChessPiece) o;
+        return color == that.color && type == that.type;
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(color, type);
+    }
+    @Override
+    public String toString() {
+        return switch (type) {
+            case KING -> color == ChessGame.TeamColor.WHITE ? "K" : "k";
+            case QUEEN -> color == ChessGame.TeamColor.WHITE ? "Q" : "q";
+            case BISHOP -> color == ChessGame.TeamColor.WHITE ? "B" : "b";
+            case KNIGHT -> color == ChessGame.TeamColor.WHITE ? "N" : "n";
+            case ROOK -> color == ChessGame.TeamColor.WHITE ? "R" : "r";
+            case PAWN -> color == ChessGame.TeamColor.WHITE ? "P" : "p";
+        };
+    }
+
 }

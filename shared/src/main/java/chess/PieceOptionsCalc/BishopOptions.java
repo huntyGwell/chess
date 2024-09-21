@@ -13,6 +13,6 @@ public class BishopOptions implements PieceOptionsCalc {
         int x = position.getColumn();
         int[][] directions = {{-1, 1}, {1, 1}, {1, -1}, {-1, -1}};
         ChessGame.TeamColor teamColor = board.getTeamColor(position);
-        return PieceOptionsCalc.CreateDirectionMoves(board, position, directions, y, x, teamColor);
+        return PieceOptionsCalc.crossMoves(board, position, directions, y, x, teamColor);
     }
 }
