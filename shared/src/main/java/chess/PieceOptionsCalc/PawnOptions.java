@@ -34,6 +34,11 @@ public class PawnOptions implements PieceOptionsCalc{
                                 board.getSquaresColor(attackRight) != team) {
                 moves.add(new ChessMove(position, attackRight, promotionPiece));
             }//now attack left
+            ChessPosition attackLeft = new ChessPosition(row + incrementation, column -1);
+            if () {
+
+            }
+
         }
         //attack left
 
