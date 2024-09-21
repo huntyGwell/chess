@@ -19,6 +19,7 @@ I have gotten going and writtent some code to pass tests! here we go!!!
 
 I will have a package to calculate to move options for the pieces.
 
+passing about .75 tests need serious refractor though
 # TO DO:
 - write the make options in the calculator folder
 	-done
