@@ -14,20 +14,22 @@ public class PawnOptions implements PieceOptionsCalc{
         HashSet<ChessMove> moves = HashSet.newHashSet(17);
         int row =position.getRow();
         int column = position.getColumn();
-        ChessPiece.PieceType[] promo = new ChessPiece.PieceType[]{null};
-        //attack right
+        ChessPiece.PieceType[] promotionPieces = new ChessPiece.PieceType[]{null};
+
+        ChessGame.TeamColor team = board.getTeamColor(position);
+        int incrementation = team == ChessGame.TeamColor.WHITE ? 1 : -1; //Black??
+
+        boolean promote = (team == ChessGame.TeamColor.WHITE && row == 7) || (team == ChessGame.TeamColor.BLACK && row == 2);
+        if (promote) {
+            promotionPieces = new ChessPiece.PieceType[]{ChessPiece.PieceType.QUEEN, ChessPiece.PieceType.KNIGHT,
+            ChessPiece.PieceType.BISHOP, ChessPiece.PieceType.ROOK};
+        }//now forward move
+         //attack right
 
         //attack left
 
-        //doublejump first move
-        //Add first move double, if available
-        ChessPosition doubleJump = new ChessPosition(row + moveIncrement*2, column);
-        if (PieceOptionsCalc.isValidPosition(doubleJump) &&
-                ((team == ChessGame.TeamColor.WHITE && currY == 2) || (team == ChessGame.TeamColor.BLACK && currY == 7)) &&
-                board.getPiece(doubleForwardPosition) == null &&
-                board.getPiece(forwardPosition) == null) {
-            moves.add(new ChessMove(position, doubleJump, promotionPiece));
-        }
+        //doublejump first move option
+
         return moves;
     }
 }
