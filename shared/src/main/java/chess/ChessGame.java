@@ -12,10 +12,8 @@ import java.util.Objects;
  */
 public class ChessGame {
 
-    private TeamColor colorsMove;
+    private TeamColor colorTurn;
     private ChessBoard board;
-
-    //gameOver Flag bool
 
     public ChessGame() {
         board = new ChessBoard();
@@ -28,25 +26,25 @@ public class ChessGame {
      * @return Which team's turn it is
      */
     public TeamColor getTeamTurn() {
-        return colorsMove;
+        return colorTurn;
     }
-
     /**
      * Set's which teams turn it is
      *
      * @param team the team whose turn it is
      */
     public void setTeamTurn(TeamColor team) {
-        colorsMove = team;
+        colorTurn = team;
     }
-
     /**
      * Enum identifying the 2 possible teams in a chess game
      */
     public enum TeamColor {
         WHITE,
-        BLACK
-        //anything else needed to enum??
+        BLACK;
+        public String toString() {
+            return this == WHITE ? "white" : "black";
+        }
     }
 
     /**
@@ -71,7 +69,7 @@ public class ChessGame {
                 validMoves.add(move);
             }//otherwise revert
             board.addPiece(move.getEndPosition(), temporary);
-            board.addPiece(move.getStartPosition(), piece); //this throws an error too----fixed ... i think!
+            board.addPiece(startPosition, piece); //this throws an error too----fixed ... i think!
         }
         return validMoves;
         }
@@ -83,28 +81,27 @@ public class ChessGame {
      * @throws InvalidMoveException if move is invalid
      */
     public void makeMove(ChessMove move) throws InvalidMoveException {
-        boolean isColorsTurn = getTeamTurn() == board.getTeamColor(move.getStartPosition());
+        boolean isColorTurn = getTeamTurn() == board.getTeamColor(move.getStartPosition());
         Collection<ChessMove> availableMoves = validMoves(move.getStartPosition());
         if (availableMoves == null) {
             throw new InvalidMoveException("no moves available");
         }
         boolean isValidMove = availableMoves.contains(move);
-        if (isValidMove && isColorsTurn) {
-            ChessPiece temporary = board.getPiece(move.getEndPosition());
+        if (isValidMove && isColorTurn) {
+            ChessPiece movePiece = board.getPiece(move.getEndPosition());
             if (move.getPromotionPiece() != null) {
-                temporary = new ChessPiece(temporary.getTeamColor(), move.getPromotionPiece());
+                movePiece = new ChessPiece(movePiece.getTeamColor(), move.getPromotionPiece());
             }
             board.addPiece(move.getStartPosition(), null);
-            board.addPiece(move.getEndPosition(), temporary);
-            setTeamTurn(getTeamTurn() == TeamColor.BLACK ? TeamColor.WHITE : TeamColor.BLACK); // ternary operator
+            board.addPiece(move.getEndPosition(), movePiece);
+            setTeamTurn(getTeamTurn() == TeamColor.BLACK ? TeamColor.WHITE : TeamColor.BLACK);
             //maybe switch the colors
         }
         else {
-            throw new InvalidMoveException(String.format("valid move! %b now is %b 's turn",isValidMove,
-                    isColorsTurn)); //why does the font on format look like that?
+            throw new InvalidMoveException(String.format("valid move %b Your turn %b",isValidMove,
+                    isColorTurn)); //why does the font on format look like that?
         }//nested if and check if the correct team is up
     }
-
     /**
      * Determines if the given team is in check
      *
@@ -113,25 +110,25 @@ public class ChessGame {
      */
     public boolean isInCheck(TeamColor teamColor) {
         ChessPosition kingSpot = null;
-        for (int i = 0; i < 8; i++) {
-            for (int ii = 0; ii < 8; ii++) {
-                ChessPiece piece = board.getPiece(new ChessPosition(i, ii));
+        for (int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
+                ChessPiece piece = board.getPiece(new ChessPosition(y, x));
                 if(piece == null) {
                     continue;
                 }
                 if (piece.getTeamColor() == teamColor && piece.getPieceType() == //consider removing
                         ChessPiece.PieceType.KING) {
-                    kingSpot = new ChessPosition(i, ii);
+                    kingSpot = new ChessPosition(y, x);
                 }
             }
         }
-        for (int i = 0; i < 8; i++) { //=================refractor the null check
-            for (int ii = 0; ii < 8; ii++) {
-                ChessPiece piece = board.getPiece(new ChessPosition(i, ii));
+        for (int y = 0; y < 8; y++) { //=================refractor the null check
+            for (int x = 0; x < 8; x++) {
+                ChessPiece piece = board.getPiece(new ChessPosition(y, x));
                 if (piece == null || !piece.getTeamColor().equals(teamColor)) {
                     continue;
                 }
-                for (ChessMove opponentMove : validMoves(kingSpot)) { //look here
+                for (ChessMove opponentMove : piece.pieceMoves(board, new ChessPosition(y, x))) { //look here
                     if (opponentMove.getEndPosition().equals(kingSpot)) {
                         return true;
                     }
@@ -148,8 +145,6 @@ public class ChessGame {
      * @return True if the specified team is in checkmate
      */
     public boolean isInCheckmate(TeamColor teamColor) {
-        //needs to be in check and stalemate
-        //set gameOver to true
         return isInCheck(teamColor) && isInStalemate(teamColor);
     }
 
@@ -195,21 +190,19 @@ public class ChessGame {
     public ChessBoard getBoard() {
         return board;
     }
-    //game over flag??
-    //Overrides
     @Override
     public String toString() {
-        return "Color" + colorsMove + "\n" + board;
+        return "ChessGame{" + "teamTurn=" + colorTurn + ", board=" + board + '}';
     }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ChessGame chessGame = (ChessGame) o;
-        return colorsMove == chessGame.colorsMove && board.equals(chessGame.board);
+        return colorTurn == chessGame.colorTurn && board.equals(chessGame.board);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(colorsMove, board);
+        return Objects.hash(colorTurn, board);
     }
 }
