@@ -34,3 +34,10 @@ passing about .75 tests need serious refractor though
 	-done
 
 PROBLEM WITH OVERRIDES???
+	-no...
+
+CHECK IF PEICES ARE PASSING
+	board is fialing but pieces...?
+	if not compleatly trash/rehaul options clac
+		otherwise idk
+			welp glass half full pieces are failing more than 2/3 of the time so I think I know what to do

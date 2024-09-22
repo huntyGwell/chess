@@ -94,13 +94,11 @@ public class ChessGame {
             }
             board.addPiece(move.getStartPosition(), null);
             board.addPiece(move.getEndPosition(), movePiece);
-            setTeamTurn(getTeamTurn() == TeamColor.BLACK ? TeamColor.WHITE : TeamColor.BLACK);
-            //maybe switch the colors
+            setTeamTurn(getTeamTurn() == TeamColor.WHITE ? TeamColor.BLACK : TeamColor.WHITE);
         }
         else {
-            throw new InvalidMoveException(String.format("valid move %b Your turn %b",isValidMove,
-                    isColorTurn)); //why does the font on format look like that?
-        }//nested if and check if the correct team is up
+            throw new InvalidMoveException(String.format("valid move %b Your turn %b",isValidMove, isColorTurn));
+        }
     }
     /**
      * Determines if the given team is in check

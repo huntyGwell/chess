@@ -12,7 +12,6 @@ public class ChessBoard {
     private ChessPiece[][] squares = new ChessPiece[8][8];
 
     public ChessBoard() {
-        //I think I need some implementation here??
         squares = new ChessPiece[8][8];
     }
 
@@ -33,7 +32,7 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
-        return squares[position.getRow()-1][position.getColumn()-1];//0 index??
+        return squares[position.getRow()-1][position.getColumn()-1];
     }
 
     /**
