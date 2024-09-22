@@ -2,7 +2,6 @@ package chess;
 
 import chess.PieceOptionsCalc.*;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -13,15 +12,13 @@ import java.util.Objects;
  * signature of the existing methods.
  */
 public class ChessPiece {
-    //make private color and type
-    private ChessGame.TeamColor color;
-    private PieceType type;
+    private final ChessGame.TeamColor team;
+    private final PieceType type;
 
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
-        this.color = pieceColor;
+        this.team = pieceColor;
         this.type = type;
     }
-
     /**
      * The various different chess piece options
      */
@@ -38,7 +35,7 @@ public class ChessPiece {
      * @return Which team this chess piece belongs to
      */
     public ChessGame.TeamColor getTeamColor() {
-        return color;
+        return team;
     }
 
     /**
@@ -56,7 +53,7 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-        return switch (type) {
+        return switch (type) { // I think I need to take a 
             case KING -> KingOptions.calculateOptions(board, myPosition);
             case QUEEN -> QueenOptions.calculateOptions(board, myPosition);
             case BISHOP -> BishopOptions.calculateOptions(board, myPosition);
@@ -70,21 +67,21 @@ public class ChessPiece {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ChessPiece that = (ChessPiece) o;
-        return color == that.color && type == that.type;
+        return team == that.team && type == that.type;
     }
     @Override
     public int hashCode() {
-        return Objects.hash(color, type);
+        return Objects.hash(team, type);
     }
     @Override
     public String toString() {
         return switch (type) {
-            case KING -> color == ChessGame.TeamColor.WHITE ? "K" : "k";
-            case QUEEN -> color == ChessGame.TeamColor.WHITE ? "Q" : "q";
-            case BISHOP -> color == ChessGame.TeamColor.WHITE ? "B" : "b";
-            case KNIGHT -> color == ChessGame.TeamColor.WHITE ? "N" : "n";
-            case ROOK -> color == ChessGame.TeamColor.WHITE ? "R" : "r";
-            case PAWN -> color == ChessGame.TeamColor.WHITE ? "P" : "p";
+            case KING -> team == ChessGame.TeamColor.WHITE ? "K" : "k";
+            case QUEEN -> team == ChessGame.TeamColor.WHITE ? "Q" : "q";
+            case BISHOP -> team == ChessGame.TeamColor.WHITE ? "B" : "b";
+            case KNIGHT -> team == ChessGame.TeamColor.WHITE ? "N" : "n";
+            case ROOK -> team == ChessGame.TeamColor.WHITE ? "R" : "r";
+            case PAWN -> team == ChessGame.TeamColor.WHITE ? "P" : "p";
         };
     }
 
