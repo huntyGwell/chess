@@ -32,3 +32,5 @@ passing about .75 tests need serious refractor though
 	-done
 -implememnt pieces options
 	-done
+
+PROBLEM WITH OVERRIDES???

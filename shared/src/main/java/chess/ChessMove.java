@@ -9,14 +9,14 @@ import java.util.Objects;
  * signature of the existing methods.
  */
 public class ChessMove {
-    // I'm pretty sure these should not be mutable.
+
     private final ChessPosition startPosition;
     private final ChessPosition endPosition;
     private final ChessPiece.PieceType promotionPiece;
 
     public ChessMove(ChessPosition startPosition, ChessPosition endPosition,
                      ChessPiece.PieceType promotionPiece) {
-        // define them here
+
         this.startPosition = startPosition;
         this.endPosition = endPosition;
         this.promotionPiece = promotionPiece;
@@ -51,17 +51,15 @@ public class ChessMove {
         return "ChessMove{" + "startPosition=" + startPosition + ", endPosition=" + endPosition +
                 ", promotionPiece=" + promotionPiece + '}';
     }
-    //professor jensen said we would probably need to write overrides for a couple other function like equals
-    // and maybe one other???
-    //hash
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ChessMove that = (ChessMove) o;
-        return startPosition.equals(that.startPosition) && endPosition.equals(that.endPosition)
-                && promotionPiece == that.promotionPiece;
+        ChessMove chessMove = (ChessMove) o;
+        return Objects.equals(startPosition, chessMove.startPosition) && Objects.equals(endPosition, chessMove.endPosition) && promotionPiece == chessMove.promotionPiece;
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(startPosition, endPosition, promotionPiece);
