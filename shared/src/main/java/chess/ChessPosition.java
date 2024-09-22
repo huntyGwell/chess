@@ -47,6 +47,6 @@ public class ChessPosition {
     }
     @Override
     public String toString() {
-        return "Current Place: row = " + row + ", column = " + column;
+        return "ChessPosition{" + "row=" + row + ", col=" + column + '}';
     }
 }
