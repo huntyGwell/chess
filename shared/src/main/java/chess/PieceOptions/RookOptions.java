@@ -12,7 +12,7 @@ public class RookOptions implements PieceOptions {
         int y = position.getRow();
         int x = position.getColumn();
         int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-        ChessGame.TeamColor teamColor = board.getTeamColor(position);
+        ChessGame.TeamColor teamColor = board.getSquaresColor(position);
         return PieceOptions.dynamicMoves(board, position, directions, y, x, teamColor);
     }
 }

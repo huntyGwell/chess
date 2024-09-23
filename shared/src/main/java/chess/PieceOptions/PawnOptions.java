@@ -16,7 +16,7 @@ public class PawnOptions implements PieceOptions {
         int column = position.getColumn();
         ChessPiece.PieceType[] promotionPieces = new ChessPiece.PieceType[]{null};
 
-        ChessGame.TeamColor team = board.getTeamColor(position);
+        ChessGame.TeamColor team = board.getSquaresColor(position);
         int incrementation = team == ChessGame.TeamColor.WHITE ? 1 : -1; //Black??
 
         boolean promote = (team == ChessGame.TeamColor.WHITE && row == 7) || (team == ChessGame.TeamColor.BLACK && row == 2);
