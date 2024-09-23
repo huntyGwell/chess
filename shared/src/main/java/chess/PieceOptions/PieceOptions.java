@@ -9,9 +9,9 @@ import java.util.HashSet;
 
 public interface PieceOptions {
 
-//    static HashSet<ChessMove> getOptions(ChessBoard board, ChessPosition position) {
-//        return null; //individual implementation
-//    }
+    static HashSet<ChessMove> getOptions(ChessBoard board, ChessPosition position) {
+        return null; //individual implementation
+    }
 
 
     static boolean isValidPosition(ChessPosition position) {
