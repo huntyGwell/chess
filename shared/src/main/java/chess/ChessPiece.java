@@ -53,7 +53,7 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-        return switch (type) { // I think I need to take a
+        return switch (type) {
             case KING -> KingOptions.getOptions(board, myPosition);
             case QUEEN -> QueenOptions.getOptions(board, myPosition);
             case BISHOP -> BishopOptions.getOptions(board, myPosition);
