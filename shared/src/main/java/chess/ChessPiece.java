@@ -52,14 +52,14 @@ public class ChessPiece {
      *
      * @return Collection of valid moves
      */
-    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
+    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition position) {
         return switch (type) {
-            case KING -> KingOptions.getOptions(board, myPosition);
-            case QUEEN -> QueenOptions.getOptions(board, myPosition);
-            case BISHOP -> BishopOptions.getOptions(board, myPosition);
-            case KNIGHT -> KnightOptions.getOptions(board, myPosition);
-            case ROOK -> RookOptions.getOptions(board, myPosition);
-            case PAWN -> PawnOptions.getOptions(board, myPosition);
+            case KING -> KingOptions.getOptions(board, position);
+            case QUEEN -> QueenOptions.getOptions(board, position);
+            case BISHOP -> BishopOptions.getOptions(board, position);
+            case KNIGHT -> KnightOptions.getOptions(board, position);
+            case ROOK -> RookOptions.getOptions(board, position);
+            case PAWN -> PawnOptions.getOptions(board, position);
         };
     }
     @Override
@@ -69,10 +69,12 @@ public class ChessPiece {
         ChessPiece that = (ChessPiece) o;
         return team == that.team && type == that.type;
     }
+    
     @Override
     public int hashCode() {
         return Objects.hash(team, type);
     }
+
     @Override
     public String toString() {
         return switch (type) {
