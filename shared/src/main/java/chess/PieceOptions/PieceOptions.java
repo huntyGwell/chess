@@ -26,15 +26,14 @@ public interface PieceOptions {
         ChessGame.TeamColor team = board.getSquaresColor(position);
         for(int[] realizableMove : realizableMoves) {
             ChessPosition newPosition = new ChessPosition(row + realizableMove[1], column + realizableMove[0]);
-            if(isValidPosition(newPosition) && board.getSquaresColor(newPosition) != team) {
+            if(isValidPosition(newPosition) && board.getSquaresColor(newPosition) != team)
                 moves.add(new ChessMove(position, newPosition, null));
-            }// {}
         }
         return moves;
     }
     static HashSet<ChessMove> dynamicMoves(ChessBoard board, ChessPosition position, int[][] moveDir,
                                            int row, int column, ChessGame.TeamColor teamColor) {
-        HashSet<ChessMove> moves = HashSet.newHashSet(83);//am i high?
+        HashSet<ChessMove> moves = HashSet.newHashSet(83);
         for (int[] direction : moveDir) {
             boolean open = true;
             int i = 1;
