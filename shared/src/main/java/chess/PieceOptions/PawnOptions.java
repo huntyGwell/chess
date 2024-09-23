@@ -10,7 +10,7 @@ import java.util.HashSet;
 
 public class PawnOptions implements PieceOptions {
     //this is actually harder than the others!
-    public static HashSet<ChessMove> calculateOptions(ChessBoard board, ChessPosition position){
+    public static HashSet<ChessMove> getOptions(ChessBoard board, ChessPosition position){
         HashSet<ChessMove> moves = HashSet.newHashSet(17);
         int row = position.getRow();
         int column = position.getColumn();

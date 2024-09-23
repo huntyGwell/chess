@@ -54,12 +54,12 @@ public class ChessPiece {
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
         return switch (type) { // I think I need to take a
-            case KING -> KingOptions.calculateOptions(board, myPosition);
-            case QUEEN -> QueenOptions.calculateOptions(board, myPosition);
+            case KING -> KingOptions.getOptions(board, myPosition);
+            case QUEEN -> QueenOptions.getOptions(board, myPosition);
             case BISHOP -> BishopOptions.getOptions(board, myPosition);
-            case KNIGHT -> KnightOptions.calculateOptions(board, myPosition);
-            case ROOK -> RookOptions.calculateOptions(board, myPosition);
-            case PAWN -> PawnOptions.calculateOptions(board, myPosition);
+            case KNIGHT -> KnightOptions.getOptions(board, myPosition);
+            case ROOK -> RookOptions.getOptions(board, myPosition);
+            case PAWN -> PawnOptions.getOptions(board, myPosition);
         };
     }
     @Override

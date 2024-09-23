@@ -8,7 +8,7 @@ import java.util.HashSet;
 
 
 public class KnightOptions implements PieceOptions {
-    public static HashSet<ChessMove> calculateOptions(ChessBoard chessBoard, ChessPosition position) {
+    public static HashSet<ChessMove> getOptions(ChessBoard chessBoard, ChessPosition position) {
         int[][] moves = {{-2,1},{-1,2},{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1}};
         return PieceOptions.stateMoves(chessBoard, position, moves);
     }

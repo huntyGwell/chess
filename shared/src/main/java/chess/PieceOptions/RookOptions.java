@@ -8,7 +8,7 @@ import chess.ChessBoard;
 import java.util.HashSet;
 
 public class RookOptions implements PieceOptions {
-    public static HashSet<ChessMove> calculateOptions(ChessBoard board, ChessPosition position) {
+    public static HashSet<ChessMove> getOptions(ChessBoard board, ChessPosition position) {
         int y = position.getRow();
         int x = position.getColumn();
         int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
