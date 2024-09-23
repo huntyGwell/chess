@@ -23,7 +23,7 @@ public interface PieceOptions {
         HashSet<ChessMove> moves = HashSet.newHashSet(8);
         int row = position.getRow();
         int column = position.getColumn();
-        ChessGame.TeamColor team = board.getTeamColor(position);
+        ChessGame.TeamColor team = board.getSquaresColor(position);
         for(int[] realizableMove : realizableMoves) {
             ChessPosition newPosition = new ChessPosition(row + realizableMove[1], column + realizableMove[0]);
             if(isValidPosition(newPosition) && board.getSquaresColor(newPosition) != team) {
