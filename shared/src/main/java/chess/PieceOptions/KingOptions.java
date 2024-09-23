@@ -1,4 +1,4 @@
-package chess.PieceOptionsCalc;
+package chess.PieceOptions;
 
 import chess.ChessPosition;
 import chess.ChessMove;
@@ -6,9 +6,9 @@ import chess.ChessBoard;
 
 import java.util.HashSet;
 
-public class KingOptions implements PieceOptionsCalc {
+public class KingOptions implements PieceOptions {
     public static HashSet<ChessMove> calculateOptions(ChessBoard board, ChessPosition position) {
         int[][] moves = {{-1,1},{0,1},{1,1},{1,0},{1,-1},{0,-1},{-1,-1},{-1,0}};
-        return PieceOptionsCalc.straightMoves(board, position, moves);
+        return PieceOptions.stateMoves(board, position, moves);
     }
 }

@@ -1,6 +1,6 @@
 package chess;
 
-import chess.PieceOptionsCalc.*;
+import chess.PieceOptions.*;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -56,7 +56,7 @@ public class ChessPiece {
         return switch (type) { // I think I need to take a
             case KING -> KingOptions.calculateOptions(board, myPosition);
             case QUEEN -> QueenOptions.calculateOptions(board, myPosition);
-            case BISHOP -> BishopOptions.calculateOptions(board, myPosition);
+            case BISHOP -> BishopOptions.getOptions(board, myPosition);
             case KNIGHT -> KnightOptions.calculateOptions(board, myPosition);
             case ROOK -> RookOptions.calculateOptions(board, myPosition);
             case PAWN -> PawnOptions.calculateOptions(board, myPosition);
