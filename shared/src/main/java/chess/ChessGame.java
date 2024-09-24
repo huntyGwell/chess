@@ -229,3 +229,4 @@ public class ChessGame {
         return Objects.hash(teamTurn, board);
     }
 }
+
