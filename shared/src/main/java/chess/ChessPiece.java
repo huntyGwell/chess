@@ -1,6 +1,6 @@
 package chess;
 
-import chess.PieceOptions.*;
+import chess.PieveMoveCalc.*;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -15,10 +15,11 @@ public class ChessPiece {
     private final ChessGame.TeamColor team;
     private final PieceType type;
 
-    public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
+    public ChessPiece(ChessGame.TeamColor pieceColor, PieceType type) {
         this.team = pieceColor;
         this.type = type;
     }
+
     /**
      * The various different chess piece options
      */
@@ -52,16 +53,17 @@ public class ChessPiece {
      *
      * @return Collection of valid moves
      */
-    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition position) {
+    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
         return switch (type) {
-            case KING -> KingOptions.getOptions(board, position);
-            case QUEEN -> QueenOptions.getOptions(board, position);
-            case BISHOP -> BishopOptions.getOptions(board, position);
-            case KNIGHT -> KnightOptions.getOptions(board, position);
-            case ROOK -> RookOptions.getOptions(board, position);
-            case PAWN -> PawnOptions.getOptions(board, position);
+            case KING -> KingCalc.getMoves(board, myPosition);
+            case QUEEN -> QueenCalc.getMoves(board, myPosition);
+            case BISHOP -> BishopCalc.getMoves(board, myPosition);
+            case KNIGHT -> KnightCalc.getMoves(board, myPosition);
+            case ROOK -> RookCalc.getMoves(board, myPosition);
+            case PAWN -> PawnCalc.getMoves(board, myPosition);
         };
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,11 +71,12 @@ public class ChessPiece {
         ChessPiece that = (ChessPiece) o;
         return team == that.team && type == that.type;
     }
-    
+
     @Override
     public int hashCode() {
         return Objects.hash(team, type);
     }
+    //override to string
 
     @Override
     public String toString() {
@@ -86,5 +89,4 @@ public class ChessPiece {
             case PAWN -> team == ChessGame.TeamColor.WHITE ? "P" : "p";
         };
     }
-
 }
