@@ -55,7 +55,7 @@ public class ChessGame {
         if(startPosition == null) {
             return null;
         }
-        ChessPiece currentPiece = board.getPiece(startPosition);
+        ChessPiece currentPiece = board.getPiece(startPosition);//seems to be a problem in the following line ---- debug time :)
         HashSet<ChessMove> possibleMoves = (HashSet<ChessMove>) board.getPiece(startPosition).pieceMoves(board, startPosition);
         HashSet<ChessMove> validMoves = new HashSet<>();
         for (ChessMove move : possibleMoves) {
@@ -80,7 +80,7 @@ public class ChessGame {
     public void makeMove(ChessMove move) throws InvalidMoveException {
         boolean isTeamTurn = getTeamTurn() == board.getSquaresTeam(move.getStartPosition());
         Collection<ChessMove> goodMoves = validMoves(move.getStartPosition());
-        if (goodMoves == null) {
+        if (goodMoves == null) {//problem with valid moves?? debug time :)
             throw new InvalidMoveException("No valid moves");
         }
         boolean isValid = goodMoves.contains(move);
@@ -184,6 +184,11 @@ public class ChessGame {
     public ChessBoard getBoard() {
         return board;
     }
+    //work on these after all other tests pass
+
+    //Castling
+
+    //En Passant
 
     @Override
     public boolean equals(Object o) {
