@@ -14,30 +14,17 @@ I was reading the provided documentation when I had to tend to some other pressi
 ## Phase 0:
 I have gotten it working so far in intellij!
 
-
 I have gotten going and writtent some code to pass tests! here we go!!!
+all done!
 
-I will have a package to calculate to move options for the pieces.
+## Phase 1:
+got the tests!
+I think I will try for the extra credit --- we will see
 
-passing about .75 tests need serious refractor though
+currently passing 10/26 tests
+
 # TO DO:
-- write the make options in the calculator folder
-	-done
--finish chessGame
-	-done
--finish chessBoard
-	-done
--finish chesspiece
--finish optionsinterface
-	-done
--implememnt pieces options
-	-done
+debug
 
-PROBLEM WITH OVERRIDES???
-	-no...
-
-CHECK IF PEICES ARE PASSING
-	board is fialing but pieces...?
-	if not compleatly trash/rehaul options clac
-		otherwise idk
-			welp glass half full pieces are failing more than 2/3 of the time so I think I know what to do
+write en pasant
+write castling 
