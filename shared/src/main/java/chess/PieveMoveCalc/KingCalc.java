@@ -5,6 +5,7 @@ import chess.ChessMove;
 import chess.ChessPosition;
 
 import java.util.HashSet;
+
 public class KingCalc implements PieceMoveCalc {
 
     public static HashSet<ChessMove> getMoves(ChessBoard board, ChessPosition position) {

@@ -9,9 +9,9 @@ import java.util.HashSet;
 
 public interface PieceMoveCalc {
 
-    static HashSet<ChessMove> getOptions(ChessBoard board, ChessPosition currPosition) {
-        return null;
-    }
+    //static HashSet<ChessMove> getMoves(ChessBoard board, ChessPosition currPosition) {
+        //return null;
+    //}
 
     static boolean isValidSquare(ChessPosition position) {
         return (position.getRow() >= 1 && position.getRow() <= 8) &&
