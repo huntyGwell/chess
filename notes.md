@@ -24,7 +24,7 @@ I think I will try for the extra credit --- we will see
 currently passing 10/26 tests
 
 # TO DO:
-debug
+- debug
 
 write en pasant
 write castling 
