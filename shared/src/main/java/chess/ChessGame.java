@@ -33,7 +33,8 @@ public class ChessGame {
      */
     public void setTeamTurn(TeamColor team) {
         teamTurn = team;
-    }
+    } //I think I need to adjust here... maybe set as defualt to white..."?
+    //and if not then
 
     /**
      * Enum identifying the 2 possible teams in a chess game
@@ -54,10 +55,10 @@ public class ChessGame {
     public Collection<ChessMove> validMoves(ChessPosition startPosition) {
         if(startPosition == null) {
             return null;
-        }
+        }// probably need a refractor here... debug issues here.
         ChessPiece currentPiece = board.getPiece(startPosition);//seems to be a problem in the following line ---- debug time :)
         HashSet<ChessMove> possibleMoves = (HashSet<ChessMove>) board.getPiece(startPosition).pieceMoves(board, startPosition);
-        HashSet<ChessMove> validMoves = new HashSet<>();
+        HashSet<ChessMove> validMoves = new HashSet<>();// different hash here
         for (ChessMove move : possibleMoves) {
             ChessPiece temp = board.getPiece(move.getEndPosition());
             board.addPiece(startPosition, null);
@@ -94,7 +95,7 @@ public class ChessGame {
             setTeamTurn(getTeamTurn() == TeamColor.WHITE ? TeamColor.BLACK : TeamColor.WHITE);
         }
         else {
-            throw new InvalidMoveException("valid move, next turn");
+            throw new InvalidMoveException("valid move, next turn");//formnat output
         }
     }
 
@@ -104,6 +105,7 @@ public class ChessGame {
      * @param teamColor which team to check for check
      * @return True if the specified team is in check
      */
+    //double check here... as i debug i see problems coming from here.
     public boolean isInCheck(TeamColor teamColor) {
         ChessPosition kingPosition = null;
         for (int y = 1; y <= 8 && kingPosition == null; y++) {
@@ -150,6 +152,7 @@ public class ChessGame {
      * @param teamColor which team to check for stalemate
      * @return True if the specified team is in stalemate, otherwise false
      */
+    //double check here... as i debug i see problems coming from here.
     public boolean isInStalemate(TeamColor teamColor) {
         for (int y = 1; y <= 8; y++) {
             for (int x = 1; x <= 8; x++) {
