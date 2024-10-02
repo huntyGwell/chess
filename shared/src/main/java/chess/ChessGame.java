@@ -78,6 +78,9 @@ public class ChessGame {
      * @param move chess move to preform
      * @throws InvalidMoveException if move is invalid
      */
+
+    // I am passing more tests!! but I have an issue here! it is late so I need to go to bed
+    // but I what to document this so I know where to pick up tomorrow
     public void makeMove(ChessMove move) throws InvalidMoveException {
         boolean isTeamTurn = getTeamTurn() == board.getSquaresTeam(move.getStartPosition());
         Collection<ChessMove> goodMoves = validMoves(move.getStartPosition());
