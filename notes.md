@@ -29,5 +29,7 @@ currently passing 10/26 tests
 	- so I need to refractor and specifically look at the null 
 	- and throw part part of .../chessgame -- makemove
 
+-write helperfunctions??
+
 write en pasant
 write castling 
