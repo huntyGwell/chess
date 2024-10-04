@@ -85,8 +85,8 @@ public class ChessGame {
         boolean isTeamTurn = getTeamTurn() == board.getSquaresTeam(move.getStartPosition());
         Collection<ChessMove> goodMoves = validMoves(move.getStartPosition());
         if (goodMoves == null) {
-            throw new InvalidMoveException("No valid moves");
-        }
+            throw new InvalidMoveException("No valid moves");//-------exiting here
+        }//kay so it should not be exiting when it is. ... need some debug on this
         boolean isValid = goodMoves.contains(move);
         if (isValid && isTeamTurn) {
             ChessPiece movePiece = board.getPiece(move.getStartPosition());
@@ -98,7 +98,7 @@ public class ChessGame {
             setTeamTurn(getTeamTurn() == TeamColor.WHITE ? TeamColor.BLACK : TeamColor.WHITE);
         }
         else {
-            throw new InvalidMoveException("valid move, next turn");//formnat output
+            throw new InvalidMoveException("valid move, next turn");//format output
         }
     }
 
@@ -156,6 +156,7 @@ public class ChessGame {
      * @return True if the specified team is in stalemate, otherwise false
      */
     //double check here... as i debug i see problems coming from here.
+    //==================================================================def an issue here
     public boolean isInStalemate(TeamColor teamColor) {
         for (int y = 1; y <= 8; y++) {
             for (int x = 1; x <= 8; x++) {
