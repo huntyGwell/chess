@@ -34,7 +34,7 @@ public class ChessGame {
     public void setTeamTurn(TeamColor team) {
         teamTurn = team;
     }
-    
+
     /**
      * Enum identifying the 2 possible teams in a chess game
      */
@@ -84,7 +84,7 @@ public class ChessGame {
     public void makeMove(ChessMove move) throws InvalidMoveException {
         boolean isTeamTurn = getTeamTurn() == board.getSquaresTeam(move.getStartPosition());
         Collection<ChessMove> goodMoves = validMoves(move.getStartPosition());
-        if (goodMoves == null) {//problem with valid moves?? debug time :)
+        if (goodMoves == null) {
             throw new InvalidMoveException("No valid moves");
         }
         boolean isValid = goodMoves.contains(move);
