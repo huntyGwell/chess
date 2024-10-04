@@ -53,10 +53,11 @@ public class ChessGame {
      * startPosition
      */
     public Collection<ChessMove> validMoves(ChessPosition startPosition) {
-        if(startPosition == null) {
+        ChessPiece currentPiece = board.getPiece(startPosition);
+        if(currentPiece == null) {
             return null;
         }// probably need a refractor here... debug issues here.
-        ChessPiece currentPiece = board.getPiece(startPosition);//seems to be a problem in the following line ---- debug time :)
+        //ChessPiece currentPiece = board.getPiece(startPosition);//seems to be a problem in the following line ---- debug time :)
         HashSet<ChessMove> possibleMoves = (HashSet<ChessMove>) board.getPiece(startPosition).pieceMoves(board, startPosition);
         HashSet<ChessMove> validMoves = new HashSet<>();// different hash here
         for (ChessMove move : possibleMoves) {
