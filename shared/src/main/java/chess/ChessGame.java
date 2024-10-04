@@ -33,9 +33,8 @@ public class ChessGame {
      */
     public void setTeamTurn(TeamColor team) {
         teamTurn = team;
-    } //I think I need to adjust here... maybe set as defualt to white..."?
-    //and if not then
-
+    }
+    
     /**
      * Enum identifying the 2 possible teams in a chess game
      */
@@ -56,10 +55,10 @@ public class ChessGame {
         ChessPiece currentPiece = board.getPiece(startPosition);
         if(currentPiece == null) {
             return null;
-        }// probably need a refractor here... debug issues here.
-        //ChessPiece currentPiece = board.getPiece(startPosition);//seems to be a problem in the following line ---- debug time :)
-        HashSet<ChessMove> possibleMoves = (HashSet<ChessMove>) board.getPiece(startPosition).pieceMoves(board, startPosition);
-        HashSet<ChessMove> validMoves = new HashSet<>();// different hash here
+        }
+        HashSet<ChessMove> possibleMoves = (HashSet<ChessMove>)
+                board.getPiece(startPosition).pieceMoves(board, startPosition);
+        HashSet<ChessMove> validMoves = HashSet.newHashSet(possibleMoves.size());
         for (ChessMove move : possibleMoves) {
             ChessPiece temp = board.getPiece(move.getEndPosition());
             board.addPiece(startPosition, null);
@@ -68,7 +67,7 @@ public class ChessGame {
                 validMoves.add(move);
             }
             board.addPiece(move.getEndPosition(), temp);
-            board.addPiece(move.getEndPosition(), temp);
+            board.addPiece(move.getStartPosition(), currentPiece);
         }
         return validMoves;
     }
