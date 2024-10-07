@@ -158,6 +158,7 @@ public class ChessGame {
     //double check here... as i debug i see problems coming from here.
     //==================================================================def an issue here
     public boolean isInStalemate(TeamColor teamColor) {
+        //if (isInCheck(teamColor)) {return false;}
         for (int y = 1; y <= 8; y++) {
             for (int x = 1; x <= 8; x++) {
                 ChessPosition currentPosition = new ChessPosition(y, x);
