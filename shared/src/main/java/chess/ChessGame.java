@@ -158,7 +158,7 @@ public class ChessGame {
     //double check here... as i debug i see problems coming from here.
     //==================================================================def an issue here
     public boolean isInStalemate(TeamColor teamColor) {
-        //if (isInCheck(teamColor)) {return false;}
+        if (isInCheck(teamColor)) {return false;}
         for (int y = 1; y <= 8; y++) {
             for (int x = 1; x <= 8; x++) {
                 ChessPosition currentPosition = new ChessPosition(y, x);
@@ -174,6 +174,11 @@ public class ChessGame {
         }
         return true;
     }
+    // a rabbit hole that I thankfully did not go down too far.
+//    private boolean isLegalMoveAndAvoidsCheck(ChessMove move, ChessPiece currentPiece) {
+//        ChessBoard tempBoard = board;
+//
+//    }
 
     /**
      * Sets this game's chessboard with a given board
