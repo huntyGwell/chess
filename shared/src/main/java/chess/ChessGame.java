@@ -159,14 +159,13 @@ public class ChessGame {
     //==================================================================def an issue here
     public boolean isInStalemate(TeamColor teamColor) {
         if (isInCheck(teamColor)) {return false;}
-        for (int y = 1; y <= 8; y++) {
-            for (int x = 1; x <= 8; x++) {
-                ChessPosition currentPosition = new ChessPosition(y, x);
-                ChessPiece currentPiece = board.getPiece(currentPosition);
-                Collection<ChessMove> moves;
-                if(currentPiece != null && currentPiece.getTeamColor() == teamColor) {
-                    moves = validMoves(currentPosition);
-                    if(moves != null && !moves.isEmpty()) {
+        for (int row = 1; row <= 8; row++) {
+            for (int col = 1; col <= 8; col++) {
+                ChessPosition position = new ChessPosition(row, col);
+                ChessPiece piece = board.getPiece(position);
+                if(piece != null && piece.getTeamColor() == teamColor) {
+                    Collection<ChessMove> possibleMoves = validMoves(position);
+                    if (possibleMoves != null) {
                         return false;
                     }
                 }
