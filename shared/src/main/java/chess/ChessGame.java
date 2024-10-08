@@ -158,16 +158,13 @@ public class ChessGame {
     //double check here... as i debug i see problems coming from here.
     //==================================================================def an issue here
     public boolean isInStalemate(TeamColor teamColor) {
-        if (isInCheck(teamColor)) {return false;}
+        if (!isInCheck(teamColor)) {return false;}
         for (int row = 1; row <= 8; row++) {
             for (int col = 1; col <= 8; col++) {
                 ChessPosition position = new ChessPosition(row, col);
                 ChessPiece piece = board.getPiece(position);
                 if(piece != null && piece.getTeamColor() == teamColor) {
-                    Collection<ChessMove> possibleMoves = validMoves(position);
-                    if (possibleMoves != null) {
-                        return false;
-                    }
+                    if (!validMoves(position).isEmpty()) {return false;}
                 }
             }
         }
