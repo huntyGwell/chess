@@ -10,10 +10,10 @@ import java.util.Objects;
  * signature of the existing methods.
  */
 public class ChessBoard {
-    private final ChessPiece[][] boardLayout;//remove final
+    private ChessPiece[][] boardlayout;
 
     public ChessBoard() {
-        boardLayout = new ChessPiece[8][8];
+        boardlayout = new ChessPiece[8][8];
     }
 
     /**
@@ -23,7 +23,7 @@ public class ChessBoard {
      * @param piece    the piece to add
      */
     public void addPiece(ChessPosition position, ChessPiece piece) {
-        boardLayout[position.getCol()-1][position.getRow()-1] = piece;
+        boardlayout[position.getCol()-1][position.getRow()-1] = piece;
     }
 
     /**
@@ -34,7 +34,7 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
-        return boardLayout[position.getCol()-1][position.getRow()-1];
+        return boardlayout[position.getCol()-1][position.getRow()-1];
     }
 
     /**
@@ -78,12 +78,12 @@ public class ChessBoard {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ChessBoard that = (ChessBoard) o;
-        return Objects.deepEquals(boardLayout, that.boardLayout);
+        return Objects.deepEquals(boardlayout, that.boardlayout);
     }
 
     @Override
     public int hashCode() {
-        return Arrays.deepHashCode(boardLayout);
+        return Arrays.deepHashCode(boardlayout);
     }
     //override toString
 
@@ -93,7 +93,7 @@ public class ChessBoard {
         for (int y = 7; y >= 0; y--) {
             output.append("|");
             for (int x = 0; x < 8; x++) {
-                output.append(boardLayout[x][y] != null ? boardLayout[x][y].toString() : " ");
+                output.append(boardlayout[x][y] != null ? boardlayout[x][y].toString() : " ");
                 output.append("|");
             }
             output.append("\n");
