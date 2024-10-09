@@ -41,4 +41,7 @@ i am only failing 2 test(s) now!
 -write helperfunctions??
 
 check for king danger 
+	maybe not
 well maybe just focus on is in check
+	no
+focus on stalemate again and check if the move beyond is valid???
