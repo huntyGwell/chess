@@ -74,12 +74,12 @@ public class ChessBoard {
     }
 
     //copy board
-    public ChessBoard(ChessBoard copyBoard) {
-        boardlayout = new ChessPiece[8][8];
-        for (int i = 0; i < 8; i++) {
-            boardlayout[i] = Arrays.copyOf(copyBoard.boardlayout[i], 8);
-        }
-    }
+//    public ChessBoard(ChessBoard copyBoard) {
+//        boardlayout = new ChessPiece[8][8];
+//        for (int i = 0; i < 8; i++) {
+//            boardlayout[i] = Arrays.copyOf(copyBoard.boardlayout[i], 8);
+//        }
+//    }
 
     @Override
     public boolean equals(Object o) {

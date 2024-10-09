@@ -230,6 +230,20 @@ public class ChessGame {
         }
         return true;
     }
+//    private boolean kingThreatStraight(){}
+//    private boolean kingThreatDiagonal(){}
+//    private boolean kingThreatKnight(){}
+//    private boolean kingThreatPawn(){}
+//    private boolean kingDirectionalThreat(ChessPosition start, TeamColor teamColor, int [][] directions){
+//        for (int[] direction : directions) {
+//            ChessPosition current = start;
+//            while (true) {
+//                current = current[]
+//            }
+//        }
+//    }
+
+
 
     @Override
     public boolean equals(Object o) {

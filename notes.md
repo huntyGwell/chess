@@ -36,13 +36,9 @@ i had a weird time went on a wild goose chase and ended up reverting a few commi
 i want to look at Chessboard for the problem with board reset. and i need to check for check and valid moves in stalemate
 it was not there i had to reset board in the game constructor 
 
-i am only fialing 2 tests now!
-i am on to fix isStalemate
-i am failing full game test in a different spot now!
+i am only failing 2 test(s) now!
 
 -write helperfunctions??
 
-write en pasant
-	probably not
-write castling 
-	probs not
+check for king danger 
+well maybe just focus on is in check
