@@ -32,8 +32,12 @@ currently passing 10/26 tests
 	- error in isInStalemate
 	-reset board problem  ???
 
-i had a weird time went on a wild goose chase and ended up reverting a few commits. but I think I can fix some of this
+i had a weird time went on a wild goose chase and ended up reverting a few commits. but I think I can fix some of this.
 i want to look at Chessboard for the problem with board reset. and i need to check for check and valid moves in stalemate
+it was not there i had to reset board in the game constructor 
+
+i am only fialing 2 tests now!
+i am on to fix isStalemate
 
 
 -write helperfunctions??
