@@ -72,6 +72,11 @@ public class ChessGame {
         }
         return validMoves;
     }
+    //======================================//
+    //valid moves helper
+    boolean validMovesHelper(ChessMove move, ChessBoard board) {
+        return true;
+    }
 
     /**
      * Makes a move in a chess game
@@ -80,8 +85,6 @@ public class ChessGame {
      * @throws InvalidMoveException if move is invalid
      */
 
-    // I am passing more tests!! but I have an issue here! it is late so I need to go to bed
-    // but I what to document this so I know where to pick up tomorrow
     public void makeMove(ChessMove move) throws InvalidMoveException {
         boolean isTeamTurn = getTeamTurn() == board.getSquaresTeam(move.getStartPosition());
         Collection<ChessMove> goodMoves = validMoves(move.getStartPosition());
@@ -102,6 +105,9 @@ public class ChessGame {
             throw new InvalidMoveException("valid move, next turn");//format output
         }
     }
+
+    //===============================//
+    //make move helper
 
     /**
      * Determines if the given team is in check
@@ -147,7 +153,8 @@ public class ChessGame {
      */
     public boolean isInCheckmate(TeamColor teamColor) {
         return isInCheck(teamColor) && isInStalemate(teamColor);
-        //because
+        //because stalemate checks for isInCheck this won't work
+        //need to tune this up
     }
 
     /**
@@ -160,7 +167,7 @@ public class ChessGame {
     //double check here... as i debug i see problems coming from here.
     //==================================================================def an issue here
     public boolean isInStalemate(TeamColor teamColor) {
-        if (!isInCheck(teamColor))
+        if (canKingMove(teamColor))//update with canKingMove instead
             return false;
         for (int row = 1; row <= 8; row++) {
             for (int col = 1; col <= 8; col++) {
@@ -195,11 +202,34 @@ public class ChessGame {
     public ChessBoard getBoard() {
         return board;
     }
-    //work on these after all other tests pass
-
-    //Castling
-
-    //En Passant
+    //can king move checker
+    public boolean canKingMove(TeamColor teamColor) {
+        ChessPosition kingPos = null;
+        for (int y = 1; y <= 8; y++) {
+            for (int x = 1; x <= 8; x++) {
+                ChessPosition position = new ChessPosition(y, x);
+                ChessPiece piece = board.getPiece(position);
+                if (piece != null && piece.getTeamColor() == teamColor &&
+                        piece.getPieceType() == ChessPiece.PieceType.KING) {
+                    kingPos = new ChessPosition(y, x);
+                    break;
+                }
+            }
+        }
+        if (kingPos == null) {
+            return false;
+        }
+        Collection<ChessMove> possibleMoves = validMoves(kingPos);
+        for (ChessMove move : possibleMoves) {
+            if (move.getEndPosition().equals(kingPos)) {
+                return false;
+            }
+        }
+        if (possibleMoves.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public boolean equals(Object o) {
