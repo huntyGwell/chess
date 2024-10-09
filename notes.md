@@ -38,7 +38,7 @@ it was not there i had to reset board in the game constructor
 
 i am only fialing 2 tests now!
 i am on to fix isStalemate
-
+i am failing full game test in a different spot now!
 
 -write helperfunctions??
 
