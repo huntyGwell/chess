@@ -74,9 +74,28 @@ public class ChessGame {
     }
     //======================================//
     //valid moves helper
-    boolean validMovesHelper(ChessMove move, ChessBoard board) {
-        return true;
+    private boolean validMovesHelper(ChessPosition startPosition) {
+        Collection<ChessMove> moves;
+        ChessPiece currentPiece = board.getPiece(startPosition);
+        if(currentPiece == null) {
+            return false;
+        }
+        HashSet<ChessMove> possibleMoves = (HashSet<ChessMove>) board.getPiece(startPosition).pieceMoves(board, startPosition);
+        HashSet<ChessMove> validMoves = HashSet.newHashSet(possibleMoves.size());
+        for (ChessMove move : possibleMoves) {
+            ChessPiece temp = board.getPiece(move.getEndPosition());
+            board.addPiece(startPosition, null);
+            board.addPiece(move.getEndPosition(), currentPiece);
+            if(!isInCheck(currentPiece.getTeamColor())) {
+                validMoves.add(move);
+            }
+            board.addPiece(move.getEndPosition(), temp);
+            board.addPiece(move.getStartPosition(), currentPiece);
+        }
+        return !validMoves.isEmpty();
     }
+    //===================maybe useless===============//
+    //==============================================//
 
     /**
      * Makes a move in a chess game
@@ -117,17 +136,9 @@ public class ChessGame {
      */
     //double check here... as i debug i see problems coming from here.
     public boolean isInCheck(TeamColor teamColor) {
-        ChessPosition kingPosition = null;
-        for (int y = 1; y <= 8 && kingPosition == null; y++) {
-            for (int x = 1; x <= 8 && kingPosition == null; x++) {
-                ChessPiece currentPiece = board.getPiece(new ChessPosition(y, x));
-                if (currentPiece == null) {
-                    continue;
-                }
-                if(currentPiece.getTeamColor() == teamColor && currentPiece.getPieceType() == ChessPiece.PieceType.KING) {
-                    kingPosition = new ChessPosition(y, x);
-                }
-            }
+        ChessPosition kingPosition = findKing(teamColor);
+        if(kingPosition == null) {
+            return false;
         }
         for (int y = 1; y <= 8; y++) {
             for (int x = 1; x <= 8; x++) {
@@ -144,6 +155,7 @@ public class ChessGame {
         }
         return false;
     }
+
 
     /**
      * Determines if the given team is in checkmate
@@ -204,18 +216,7 @@ public class ChessGame {
     }
     //can king move checker
     public boolean canKingMove(TeamColor teamColor) {
-        ChessPosition kingPos = null;
-        for (int y = 1; y <= 8; y++) {
-            for (int x = 1; x <= 8; x++) {
-                ChessPosition position = new ChessPosition(y, x);
-                ChessPiece piece = board.getPiece(position);
-                if (piece != null && piece.getTeamColor() == teamColor &&
-                        piece.getPieceType() == ChessPiece.PieceType.KING) {
-                    kingPos = new ChessPosition(y, x);
-                    break;
-                }
-            }
-        }
+        ChessPosition kingPos = findKing(teamColor);
         if (kingPos == null) {
             return false;
         }
@@ -242,6 +243,19 @@ public class ChessGame {
 //            }
 //        }
 //    }
+    private ChessPosition findKing(TeamColor teamColor) {
+        for (int row = 1; row <= 8; row++) {
+            for (int col = 1; col <= 8; col++) {
+                ChessPosition position = new ChessPosition(row, col);
+                ChessPiece piece = board.getPiece(position);
+                if (piece != null && piece.getTeamColor() == teamColor &&
+                        piece.getPieceType() == ChessPiece.PieceType.KING) {
+                    return new ChessPosition(row, col);
+                }
+            }
+        }
+        return null;
+    }
 
 
 
