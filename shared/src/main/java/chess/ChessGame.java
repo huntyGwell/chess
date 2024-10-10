@@ -156,16 +156,6 @@ public class ChessGame {
      */
     public boolean isInCheckmate(TeamColor teamColor) {
         return isInCheck(teamColor) && (!kingCannotMove(teamColor) && anyValidMovesAvailable(teamColor));
-        //return isInCheck(teamColor) && (kingCannotMove(teamColor) && anyValidMovesAvailable(teamColor));
-//        boolean tracker;
-//        if (isInCheck(teamColor)) {
-//            tracker = true;
-//        } else if (kingCannotMove(teamColor)) {
-//            tracker = true;
-//        } else if (anyValidMovesAvailable(teamColor)) {
-//            tracker = true;
-//        } else {tracker = false;}
-//        return tracker;
     }
 
     /**
@@ -175,8 +165,6 @@ public class ChessGame {
      * @param teamColor which team to check for stalemate
      * @return True if the specified team is in stalemate, otherwise false
      */
-    //double check here... as i debug i see problems coming from here.
-    //==================================================================def an issue here
     public boolean isInStalemate(TeamColor teamColor) {
 return (!kingCannotMove(teamColor) && anyValidMovesAvailable(teamColor)) && (!isInCheckmate(teamColor));
     }
