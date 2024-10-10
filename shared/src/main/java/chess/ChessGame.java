@@ -103,8 +103,8 @@ public class ChessGame {
         boolean isTeamTurn = getTeamTurn() == board.getSquaresTeam(move.getStartPosition());
         Collection<ChessMove> goodMoves = validMoves(move.getStartPosition());
         if (goodMoves == null) {
-            throw new InvalidMoveException("No valid moves");//-------exiting here
-        }//kay so it should not be exiting when it is. ... need some debug on this
+            throw new InvalidMoveException("No valid moves");
+        }
         boolean isValid = goodMoves.contains(move);
         if (isValid && isTeamTurn) {
             ChessPiece movePiece = board.getPiece(move.getStartPosition());
@@ -120,16 +120,12 @@ public class ChessGame {
         }
     }
 
-    //===============================//
-    //make move helper
-
     /**
      * Determines if the given team is in check
      *
      * @param teamColor which team to check for check
      * @return True if the specified team is in check
      */
-    //double check here... as i debug i see problems coming from here.
     public boolean isInCheck(TeamColor teamColor) {
         ChessPosition kingPosition = findKing(teamColor);
         if(kingPosition == null) {
@@ -159,7 +155,7 @@ public class ChessGame {
      * @return True if the specified team is in checkmate
      */
     public boolean isInCheckmate(TeamColor teamColor) {
-        return isInCheck(teamColor) && isInStalemate(teamColor);
+        return isInCheck(teamColor) && (!kingCannotMove(teamColor) && anyValidMovesAvailable(teamColor));
         //return isInCheck(teamColor) && (kingCannotMove(teamColor) && anyValidMovesAvailable(teamColor));
 //        boolean tracker;
 //        if (isInCheck(teamColor)) {
@@ -182,24 +178,7 @@ public class ChessGame {
     //double check here... as i debug i see problems coming from here.
     //==================================================================def an issue here
     public boolean isInStalemate(TeamColor teamColor) {
-        if (kingCannotMove(teamColor)) {
-            return false;}
-
-        for (int row = 1; row <= 8; row++) {
-            for (int col = 1; col <= 8; col++) {
-                ChessPosition position = new ChessPosition(row, col);
-                ChessPiece piece = board.getPiece(position);
-                if(piece != null && piece.getTeamColor() == teamColor) {
-                    if (!validMoves(position).isEmpty()) {
-                        return false;
-                    }
-                }
-            }
-        }
-//        if (isInCheck(teamColor)) {
-//            return false;
-//        }
-        return true;
+return (!kingCannotMove(teamColor) && anyValidMovesAvailable(teamColor)) && (!isInCheckmate(teamColor));
     }
 
     private boolean anyValidMovesAvailable(TeamColor teamColor) {
