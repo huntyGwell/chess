@@ -45,3 +45,7 @@ check for king danger
 well maybe just focus on is in check
 	no
 focus on stalemate again and check if the move beyond is valid???
+
+
+kay so the problem is that in fullTest black is in checkmate but it is triggering stalemate. i changed isInStalemate to call canKingMove not isInCheck.
+this should make it all a little easier for this last test. i should be able to add a little checking to canKingMove to tell not only if the king can move but if that move will put him in check.

@@ -72,31 +72,26 @@ public class ChessGame {
         }
         return validMoves;
     }
-    //======================================//
-    //valid moves helper
-    private boolean validMovesHelper(ChessPosition startPosition) {
-        Collection<ChessMove> moves;
-        ChessPiece currentPiece = board.getPiece(startPosition);
-        if(currentPiece == null) {
-            return false;
-        }
-        HashSet<ChessMove> possibleMoves = (HashSet<ChessMove>) board.getPiece(startPosition).pieceMoves(board, startPosition);
-        HashSet<ChessMove> validMoves = HashSet.newHashSet(possibleMoves.size());
-        for (ChessMove move : possibleMoves) {
-            ChessPiece temp = board.getPiece(move.getEndPosition());
-            board.addPiece(startPosition, null);
-            board.addPiece(move.getEndPosition(), currentPiece);
-            if(!isInCheck(currentPiece.getTeamColor())) {
-                validMoves.add(move);
+    // is next king move valid
+    private boolean isNextMoveValid(TeamColor teamColor) {
+        ChessPosition kingPos = findKing(teamColor);
+        //get all possible moves valid moves. see if any of those valid move put king in check
+        Collection<ChessMove> hypotheticalMoves = validMoves(kingPos);
+        for(ChessMove move : hypotheticalMoves) {
+            //testing the move
+            ChessPiece tempKing = board.getPiece(move.getEndPosition());
+            board.addPiece(move.getStartPosition(), null);
+            board.addPiece(move.getEndPosition(), board.getPiece(kingPos));
+            boolean isSafe = isInCheck(teamColor);//checking
+            //undoing the move
+            board.addPiece(move.getEndPosition(), tempKing);
+            board.addPiece(move.getStartPosition(), board.getPiece(kingPos));
+            if(isSafe) {
+                return true;
             }
-            board.addPiece(move.getEndPosition(), temp);
-            board.addPiece(move.getStartPosition(), currentPiece);
         }
-        return !validMoves.isEmpty();
+        return false;
     }
-    //===================maybe useless===============//
-    //==============================================//
-
     /**
      * Makes a move in a chess game
      *
@@ -179,16 +174,16 @@ public class ChessGame {
     //double check here... as i debug i see problems coming from here.
     //==================================================================def an issue here
     public boolean isInStalemate(TeamColor teamColor) {
-        if (canKingMove(teamColor))//update with canKingMove instead
+        if (kingCannotMove(teamColor))
             return false;
+        if (isNextMoveValid(teamColor))//-----------------------------------------
+            return true;//--------------------------------------------------------
         for (int row = 1; row <= 8; row++) {
             for (int col = 1; col <= 8; col++) {
                 ChessPosition position = new ChessPosition(row, col);
                 ChessPiece piece = board.getPiece(position);
-                Collection<ChessMove> moves;
                 if(piece != null && piece.getTeamColor() == teamColor) {
-                    moves = validMoves(position);
-                    if(moves != null && !moves.isEmpty()) {
+                    if (!validMoves(position).isEmpty()) {
                         return false;
                     }
                 }
@@ -215,7 +210,7 @@ public class ChessGame {
         return board;
     }
     //can king move checker
-    public boolean canKingMove(TeamColor teamColor) {
+    public boolean kingCannotMove(TeamColor teamColor) {
         ChessPosition kingPos = findKing(teamColor);
         if (kingPos == null) {
             return false;
@@ -223,7 +218,7 @@ public class ChessGame {
         Collection<ChessMove> possibleMoves = validMoves(kingPos);
         for (ChessMove move : possibleMoves) {
             if (move.getEndPosition().equals(kingPos)) {
-                return false;
+                return validMoves(move.getStartPosition()).isEmpty();//worry
             }
         }
         if (possibleMoves.isEmpty()) {
@@ -231,18 +226,6 @@ public class ChessGame {
         }
         return true;
     }
-//    private boolean kingThreatStraight(){}
-//    private boolean kingThreatDiagonal(){}
-//    private boolean kingThreatKnight(){}
-//    private boolean kingThreatPawn(){}
-//    private boolean kingDirectionalThreat(ChessPosition start, TeamColor teamColor, int [][] directions){
-//        for (int[] direction : directions) {
-//            ChessPosition current = start;
-//            while (true) {
-//                current = current[]
-//            }
-//        }
-//    }
     private ChessPosition findKing(TeamColor teamColor) {
         for (int row = 1; row <= 8; row++) {
             for (int col = 1; col <= 8; col++) {
