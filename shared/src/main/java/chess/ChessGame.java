@@ -160,8 +160,16 @@ public class ChessGame {
      */
     public boolean isInCheckmate(TeamColor teamColor) {
         return isInCheck(teamColor) && isInStalemate(teamColor);
-        //because stalemate checks for isInCheck this won't work
-        //need to tune this up
+        //return isInCheck(teamColor) && (kingCannotMove(teamColor) && anyValidMovesAvailable(teamColor));
+//        boolean tracker;
+//        if (isInCheck(teamColor)) {
+//            tracker = true;
+//        } else if (kingCannotMove(teamColor)) {
+//            tracker = true;
+//        } else if (anyValidMovesAvailable(teamColor)) {
+//            tracker = true;
+//        } else {tracker = false;}
+//        return tracker;
     }
 
     /**
@@ -174,10 +182,27 @@ public class ChessGame {
     //double check here... as i debug i see problems coming from here.
     //==================================================================def an issue here
     public boolean isInStalemate(TeamColor teamColor) {
-        if (kingCannotMove(teamColor))
-            return false;
-        if (isNextMoveValid(teamColor))//-----------------------------------------
-            return true;//--------------------------------------------------------
+        if (kingCannotMove(teamColor)) {
+            return false;}
+
+        for (int row = 1; row <= 8; row++) {
+            for (int col = 1; col <= 8; col++) {
+                ChessPosition position = new ChessPosition(row, col);
+                ChessPiece piece = board.getPiece(position);
+                if(piece != null && piece.getTeamColor() == teamColor) {
+                    if (!validMoves(position).isEmpty()) {
+                        return false;
+                    }
+                }
+            }
+        }
+//        if (isInCheck(teamColor)) {
+//            return false;
+//        }
+        return true;
+    }
+
+    private boolean anyValidMovesAvailable(TeamColor teamColor) {
         for (int row = 1; row <= 8; row++) {
             for (int col = 1; col <= 8; col++) {
                 ChessPosition position = new ChessPosition(row, col);
@@ -226,6 +251,7 @@ public class ChessGame {
         }
         return true;
     }
+
     private ChessPosition findKing(TeamColor teamColor) {
         for (int row = 1; row <= 8; row++) {
             for (int col = 1; col <= 8; col++) {
