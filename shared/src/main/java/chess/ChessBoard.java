@@ -1,5 +1,8 @@
 package chess;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 /**
  * A chessboard that can hold and rearrange chess pieces.
  * <p>
@@ -7,9 +10,10 @@ package chess;
  * signature of the existing methods.
  */
 public class ChessBoard {
+    private final ChessPiece[][] boardlayout;
 
     public ChessBoard() {
-        
+        boardlayout = new ChessPiece[8][8];
     }
 
     /**
@@ -19,7 +23,7 @@ public class ChessBoard {
      * @param piece    the piece to add
      */
     public void addPiece(ChessPosition position, ChessPiece piece) {
-        throw new RuntimeException("Not implemented");
+        boardlayout[position.getCol()-1][position.getRow()-1] = piece;
     }
 
     /**
@@ -30,7 +34,7 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
-        throw new RuntimeException("Not implemented");
+        return boardlayout[position.getCol()-1][position.getRow()-1];
     }
 
     /**
@@ -38,6 +42,70 @@ public class ChessBoard {
      * (How the game of chess normally starts)
      */
     public void resetBoard() {
-        throw new RuntimeException("Not implemented");
+        addPiece(new ChessPosition(1,1), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK));
+        addPiece(new ChessPosition(1,2), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT));
+        addPiece(new ChessPosition(1,3), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP));
+        addPiece(new ChessPosition(1,4), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.QUEEN));
+        addPiece(new ChessPosition(1,5), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KING));
+        addPiece(new ChessPosition(1,6), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP));
+        addPiece(new ChessPosition(1,7), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT));
+        addPiece(new ChessPosition(1,8), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK));
+        for (int i = 1; i <= 8; i++) {
+            addPiece(new ChessPosition(2, i), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.PAWN));
+        }
+        addPiece(new ChessPosition(8,1), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK));
+        addPiece(new ChessPosition(8,2), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT));
+        addPiece(new ChessPosition(8,3), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP));
+        addPiece(new ChessPosition(8,4), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.QUEEN));
+        addPiece(new ChessPosition(8,5), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KING));
+        addPiece(new ChessPosition(8,6), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP));
+        addPiece(new ChessPosition(8,7), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT));
+        addPiece(new ChessPosition(8,8), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK));
+        for (int i = 1; i <= 8; i++) {
+            addPiece(new ChessPosition(7, i), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.PAWN));
+        }
+
+    }
+    //get square's team
+    public ChessGame.TeamColor getSquaresTeam(ChessPosition position) {
+        if(getPiece(position) != null) {
+            return getPiece(position).getTeamColor();
+        }else return null;
+    }
+
+    //copy board
+//    public ChessBoard(ChessBoard copyBoard) {
+//        boardlayout = new ChessPiece[8][8];
+//        for (int i = 0; i < 8; i++) {
+//            boardlayout[i] = Arrays.copyOf(copyBoard.boardlayout[i], 8);
+//        }
+//    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChessBoard that = (ChessBoard) o;
+        return Objects.deepEquals(boardlayout, that.boardlayout);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(boardlayout);
+    }
+    //override toString
+
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        for (int y = 7; y >= 0; y--) {
+            output.append("|");
+            for (int x = 0; x < 8; x++) {
+                output.append(boardlayout[x][y] != null ? boardlayout[x][y].toString() : " ");
+                output.append("|");
+            }
+            output.append("\n");
+        }
+        return output.toString();
     }
 }
