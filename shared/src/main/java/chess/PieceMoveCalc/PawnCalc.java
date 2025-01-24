@@ -7,7 +7,7 @@ import java.util.HashSet;
 public class PawnCalc implements PieceMoveCalc{
     public static HashSet<ChessMove> getMoves(ChessBoard board, ChessPosition position) {
         HashSet<ChessMove> moves = HashSet.newHashSet(16);
-        int col = position.getCol();
+        int col = position.getColumn();
         int row = position.getRow();
         ChessPiece.PieceType[] promotionPieces = new ChessPiece.PieceType[]{null};
 

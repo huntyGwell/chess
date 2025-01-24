@@ -9,7 +9,7 @@ import java.util.HashSet;
 
 public class RookCalc implements PieceMoveCalc{
     public static HashSet<ChessMove> getMoves(ChessBoard board, ChessPosition position) {
-        int x = position.getCol();
+        int x = position.getColumn();
         int y = position.getRow();
         int[][] moves = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 

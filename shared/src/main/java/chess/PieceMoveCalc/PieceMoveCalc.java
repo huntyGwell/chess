@@ -15,12 +15,12 @@ public interface PieceMoveCalc {
 
     static boolean isValidSquare(ChessPosition position) {
         return (position.getRow() >= 1 && position.getRow() <= 8) &&
-                (position.getCol() >= 1 && position.getCol() <= 8);
+                (position.getColumn() >= 1 && position.getColumn() <= 8);
     }
 
     static HashSet<ChessMove> staticMoves(ChessPosition position, int[][] potentialMoves, ChessBoard board) {
         HashSet<ChessMove> moves = HashSet.newHashSet(8);
-        int x = position.getCol();
+        int x = position.getColumn();
         int y = position.getRow();
         ChessGame.TeamColor team = board.getSquaresTeam(position);
         for (int[] nearMove : potentialMoves) {
