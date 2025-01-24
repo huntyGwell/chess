@@ -1,4 +1,4 @@
-package chess.PieceMoveClac;
+package chess.PieceMoveCalc;
 
 public class KnightCalc {
 }
