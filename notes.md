@@ -6,3 +6,4 @@ now I have balenced everyting so that I feel confident I can do that and everyti
 else that I need to do in order to be successful!
 
 I have finished phase 0 and part of phase one, I completed the programing midterm. I feel like I have learned a lot about java and softwear development!
+not passing the extra credit stuff...
