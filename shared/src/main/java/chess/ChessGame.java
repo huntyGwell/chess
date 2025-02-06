@@ -179,8 +179,54 @@ public class ChessGame {
      *
      * IS NEXT MOVE VALID
      * return t/f if the kind has a valid next move
-     * 
+     *
      */
+
+    private ChessPosition findKing(TeamColor teamColor) {
+        for (int row = 1; row <= 8; row++) {
+            for (int col = 1; col <= 8; col++) {
+                ChessPosition position = new ChessPosition(row, col);
+                ChessPiece piece = board.getPiece(position);
+                if (piece != null && piece.getTeamColor() == teamColor &&
+                        piece.getPieceType() == ChessPiece.PieceType.KING) {
+                    return new ChessPosition(row, col);
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean kingCannotMove(TeamColor teamColor) {
+        ChessPosition kingPos = findKing(teamColor);
+        if (kingPos == null) {
+            return false;
+        }
+        Collection<ChessMove> possibleMoves = validMoves(kingPos);
+        for (ChessMove move : possibleMoves) {
+            if (move.getEndPosition().equals(kingPos)) {
+                return validMoves(move.getStartPosition()).isEmpty();//worry
+            }
+        }
+        if (possibleMoves.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean anyValidMovesAvailable(TeamColor teamColor) {
+        for (int row = 1; row <= 8; row++) {
+            for (int col = 1; col <= 8; col++) {
+                ChessPosition position = new ChessPosition(row, col);
+                ChessPiece piece = board.getPiece(position);
+                if(piece != null && piece.getTeamColor() == teamColor) {
+                    if (!validMoves(position).isEmpty()) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
 
 
     @Override
