@@ -179,6 +179,7 @@ public class ChessGame {
      *
      * IS NEXT MOVE VALID
      * return t/f if the kind has a valid next move
+     * ultimately not needed but written anyway
      *
      */
 
@@ -227,7 +228,6 @@ public class ChessGame {
         }
         return true;
     }
-
 
     @Override
     public boolean equals(Object o) {
