@@ -20,3 +20,7 @@ public record AuthData(String authToken, String username) {
 
     void clear();
 }
+///////////////
+//////////////
+/////////////
+//all of this will need to be re written
