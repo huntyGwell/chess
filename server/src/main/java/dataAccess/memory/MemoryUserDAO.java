@@ -12,11 +12,16 @@ public class MemoryUserDAO implements UserDAO {
 
     @Override
     public UserData getUser(String userName) {}
+
     @Override
     public void createUser(UserData user) {}
+
     @Override
-    public boolean verifyUser(String userName, String password) {}
+    public boolean verifyUser(String userName, String password) {
+        //check if user is in the set
+    }
+
     @Override
-    public void clear() {}
+    public void clear() {userSet.clear();} //or just new up a new hashset
 
 }
