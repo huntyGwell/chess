@@ -8,3 +8,5 @@ else that I need to do in order to be successful!
 I have finished phase 0 and part of phase one, I completed the programing midterm. I feel like I have learned a lot about java and softwear development!
 not passing the extra credit stuff...
  i am just starting over on the chess game file
+
+done thiw the model i think
