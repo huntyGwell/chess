@@ -1,5 +1,6 @@
 package dataAccess.memory;
 
+import dataAccess.DataAccessException;
 import dataAccess.UserDAO;
 import model.UserData;
 
@@ -14,11 +15,26 @@ public class MemoryUserDAO implements UserDAO {
     public UserData getUser(String userName) {}
 
     @Override
-    public void createUser(UserData user) {}
+    public void createUser(UserData user) throws DataAccessException {
+        try {
+            getUser(user.username());
+        }
+        catch (DataAccessException e) {
+            userSet.add(user);
+            return;
+        }
+        throw new DataAccessException("user already exists");
+    }
 
     @Override
     public boolean verifyUser(String userName, String password) {
         //check if user is in the set
+        for (UserData user : userSet) {
+            if (user.username().equals(userName) && user.password().equals(password)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
