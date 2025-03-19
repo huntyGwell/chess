@@ -3,8 +3,9 @@ package dataAccess;
 import model.UserData;
 
 public interface UserDAO {
-    void createUser(UserData user);
-    UserData getUser(String userName);
-    boolean verifyUser(String userName, String password);
+    void createUser(UserData user);//throws DataAccessException
+    UserData getUser(String userName);//throws DataAccessException
+    boolean verifyUser(String userName, String password);//throws DataAccessException
     void clear();
 }
+// build out exceptions
