@@ -8,7 +8,7 @@ import java.util.HashSet;
 
 public class MemoryUserDAO implements UserDAO {
 
-    private HashSet<UserData> userSet;
+    private HashSet<UserData> userSet; //final ?
     public MemoryUserDAO() {userSet = new HashSet<>(32);}
 
     @Override
@@ -41,7 +41,7 @@ public class MemoryUserDAO implements UserDAO {
                 return true;
             }
         }
-        return false;
+        return false; // potentially need to throw new data access excemption?
     }
 
     @Override
