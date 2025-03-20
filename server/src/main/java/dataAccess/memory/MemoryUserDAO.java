@@ -12,7 +12,14 @@ public class MemoryUserDAO implements UserDAO {
     public MemoryUserDAO() {userSet = new HashSet<>(32);}
 
     @Override
-    public UserData getUser(String userName) {}
+    public UserData getUser(String userName) throws DataAccessException {
+        for (UserData user : userSet) {
+            if (user.username().equals(userName)) {
+                return user;
+            }
+        }
+        throw new DataAccessException("User not found");
+    }
 
     @Override
     public void createUser(UserData user) throws DataAccessException {
