@@ -43,7 +43,7 @@ public class MemoryGameDAO implements GameDAO {
         try {
             gamesData.remove(game);
             gamesData.add(game);
-        } catch (NullPointerException e) {
+        } catch (DataAccessException e) {
             gamesData.add(game);
         }
     }
