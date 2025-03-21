@@ -9,7 +9,7 @@ import java.util.HashSet;
 public class MemoryUserDAO implements UserDAO {
 
     private HashSet<UserData> userSet; //final ?
-    public MemoryUserDAO() {userSet = new HashSet<>(32);}
+    public MemoryUserDAO() {userSet = new HashSet<>();}
 
     @Override
     public UserData getUser(String userName) throws DataAccessException {
