@@ -16,6 +16,12 @@ public class GameService {
         this.authDAO = authDAO;
     }
 
+    public int createGame(GameData game) {
+        try {
+            gameDAO.makeGame(game);
+        }
+    }
+
     public void clear() {
         gameDAO.clearGames();
     }
