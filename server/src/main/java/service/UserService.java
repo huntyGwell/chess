@@ -4,6 +4,7 @@ import dataAccess.UserDAO;
 import dataAccess.AuthDAO;
 import model.UserData;
 import model.AuthData;
+
 import java.util.UUID;
 
 public class UserService {
@@ -37,6 +38,6 @@ public class UserService {
         if (authDAO.getAuthData(authToken) == null) {
             throw new Exception("Unauthorized");
         }
-        authDAO.removeAuthData(authToken);
+        authDAO.removeAuthData(authDAO.getAuthData(authToken));
     }
 }
