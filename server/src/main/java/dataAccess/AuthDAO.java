@@ -1,15 +1,18 @@
-package dataAccess;
+package dataaccess;
 
-//I got stumped on phase 3 and am now crazy far behind as a result I am now working on phase 4 too.(also late on that...oops)
-//It seems like this should actually be an interface and I will build the use-ability out in classes for phase 3 and also
-//for phase 4
-
+import exception.ResponseException;
 import model.AuthData;
 
+import java.sql.SQLException;
+
 public interface AuthDAO {
-    void addAuthData(AuthData authData);
-    void removeAuthData(AuthData authData);
-    AuthData getAuthData(String authToken);// throws DataAccessException;
-    void clearAuthData();
+    void createAuth(AuthData authData) throws DataAccessException, ResponseException, SQLException;
+
+    AuthData getAuth(String authToken) throws DataAccessException;
+
+    String getUsername(String authToken) throws DataAccessException;
+
+    void deleteAuth(AuthData authData) throws DataAccessException, ResponseException, SQLException;
+
+    void deleteAllAuths() throws DataAccessException, ResponseException, SQLException;
 }
-//need to build out exceptions

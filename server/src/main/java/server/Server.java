@@ -1,44 +1,40 @@
 package server;
 
-import dataAccess.*;
-import org.eclipse.jetty.websocket.api.Session;
+import dataaccess.*;
+import exception.ResponseException;
 import service.GameService;
 import service.UserService;
 import spark.*;
+import spark.route.Routes;
 
-import java.util.concurrent.ConcurrentHashMap;
+import java.sql.SQLException;
 
 public class Server {
-
-
     UserDAO userDAO;
-    AuthDAO authDAO;
     GameDAO gameDAO;
+    AuthDAO authDAO;
 
-    static UserService userService;
-    static GameService gameService;
+    UserService userService;
+    GameService gameService;
 
     UserHandler userHandler;
     GameHandler gameHandler;
 
-    // {Session: gameID}
-    static ConcurrentHashMap<Session, Integer> gameSessions = new ConcurrentHashMap<>();
-
     public Server() {
 
-        userDAO = new SQLUserDAO();
-        authDAO = new SQLAuthDAO();
-        gameDAO = new SQLGameDAO();
+        try {
+            userDAO = new MySQLUserDAO();
+            gameDAO = new MySQLGameDAO();
+            authDAO = new MySQLAuthDAO();
+        } catch (ResponseException | SQLException | DataAccessException e) {
+            throw new RuntimeException(e);
+        }
 
         userService = new UserService(userDAO, authDAO);
         gameService = new GameService(gameDAO, authDAO);
 
         userHandler = new UserHandler(userService);
         gameHandler = new GameHandler(gameService);
-
-        try { DatabaseManager.createDatabase(); } catch (DataAccessException ex) {
-            throw new RuntimeException(ex);
-        }
     }
 
     public int run(int desiredPort) {
@@ -46,21 +42,22 @@ public class Server {
 
         Spark.staticFiles.location("web");
 
-        Spark.webSocket("/connect", WebsocketHandler.class);
+        Spark.webSocket("/connect", WebSocketHandler.class);
 
-        Spark.delete("/db", this::clear);
+        // Register your endpoints and handle exceptions here.
+        Spark.delete("/db", this::clearAll);
+
         Spark.post("/user", userHandler::register);
         Spark.post("/session", userHandler::login);
         Spark.delete("/session", userHandler::logout);
 
-        Spark.get("/game", gameHandler::listGames);
-        Spark.post("/game", gameHandler::createGame);
-        Spark.put("/game", gameHandler::joinGame);
+        Spark.get("/game", gameHandler::listgames);
+        Spark.post("/game", gameHandler::creategame);
+        Spark.put("/game", gameHandler::joingame);
 
-        Spark.exception(BadRequestException.class, this::badRequestExceptionHandler);
-        Spark.exception(UnauthorizedException.class, this::unauthorizedExceptionHandler);
-        Spark.exception(Exception.class, this::genericExceptionHandler);
-
+        Spark.exception(ResponseException.class, this::exceptionHandler);
+        //This line initializes the server and can be removed once you have a functioning endpoint 
+        Spark.init();
 
         Spark.awaitInitialization();
         return Spark.port();
@@ -71,32 +68,14 @@ public class Server {
         Spark.awaitStop();
     }
 
-    public void clearDB() {
-        userService.clear();
-        gameService.clear();
+    private void exceptionHandler(ResponseException ex, Request req, Response res) {
+        res.status(ex.statusCode());
     }
 
-    private Object clear(Request req, Response resp) {
-
-        clearDB();
-
-        resp.status(200);
+    public Object clearAll(Request req, Response res) throws ResponseException, DataAccessException, SQLException {
+        userService.clearUsers();
+        gameService.clearGames();
+        res.status(200);
         return "{}";
     }
-
-    private void badRequestExceptionHandler(BadRequestException ex, Request req, Response resp) {
-        resp.status(400);
-        resp.body("{ \"message\": \"Error: bad request\" }");
-    }
-
-    private void unauthorizedExceptionHandler(UnauthorizedException ex, Request req, Response resp) {
-        resp.status(401);
-        resp.body("{ \"message\": \"Error: unauthorized\" }");
-    }
-
-    private void genericExceptionHandler(Exception ex, Request req, Response resp) {
-        resp.status(500);
-        resp.body("{ \"message\": \"Error: %s\" }".formatted(ex.getMessage()));
-    }
-
 }

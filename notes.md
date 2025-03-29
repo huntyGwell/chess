@@ -14,3 +14,8 @@ done thiw the model i think
 kay I have worked through the night and am getting close\! the smeseter is ending fast so I need to really push hard!
 after this all nighter I wrote several files and need some serious debugging. i should have written more unit tests but i will do that today.
 
+I have worked through the night again and am almost ready to submitt phase 3
+
+find or create exceptions 
+make it shared main java excep
+
